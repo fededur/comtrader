@@ -4,12 +4,19 @@
 \alias{commodityRecode}
 \title{Create named vector for HS codes}
 \usage{
-commodityRecode(hsLevel = 6, sopiLevel = "SOPI Forecast Group")
+commodityRecode(
+  hsLevel = 6,
+  sopiLevel = `SOPI Forecast Group`,
+  sopiFilter = NULL,
+  query = TRUE
+)
 }
 \arguments{
 \item{hsLevel}{NZHSC level code (either 2, 4 or 6)}
 
 \item{sopiLevel}{SOPI category level (either `Primary Industry Sector`,`SOPI Forecast Group` or `Granular Group`)}
+
+\item{query}{If `TRUE` returns a vector of commodity codes (`cmdCode`) to use in a query. If `FALSE` returns a vector of `sopiLevel` names associated with the commodity code.}
 }
 \value{
 a named vector
