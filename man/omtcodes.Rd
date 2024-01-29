@@ -21,4 +21,3 @@ omtcodes
 Dataset with Comtrade and SOPI HS codes
 }
 \keyword{datasets}
-\keyword{internal}
