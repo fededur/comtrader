@@ -24,7 +24,7 @@
 #' @importFrom magrittr %>%
 #' @examples
 #' get(period = "202201")
-get <- function(
+getUNC <- function(
     typeCode = "C",
     freqCode = "M",
     clCode = "HS",
