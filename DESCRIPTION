@@ -1,0 +1,22 @@
+Package: comtrader
+Type: Package
+Title: Access data from UNComtrade API
+Version: 0.1.0
+Authors@R: 
+    person("Federico", "Duranovich", , "federico.duranovich@mpi.govt.nz", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7950-0187"))
+Maintainer: The package maintainer <federico.duranovich@mpi.govt.nz>
+Description: This package compiles a series of functions to access the UNComtrade API using R.
+    More information about UNComtrade is available at: https://unstats.un.org/wiki/display/comtrade/UN+Comtrade+Wiki.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: false
+RoxygenNote: 7.2.3
+Imports: 
+    dplyr (>= 1.1.2),
+    httr (>= 1.4.7),
+    lubridate (>= 1.9.2),
+    magrittr,
+    purrr (>= 1.0.1),
+    stringr (>= 1.5.0),
+    tibble (>= 3.2.1)
