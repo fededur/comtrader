@@ -17,7 +17,7 @@ commodityRecode <-  function(hsLevel = 6,
                              sopiLevel = `SOPI Forecast Group`,
                              sopiFilter = NULL,
                              query = TRUE) {
-  comtrader::data("omtcodes")
+  package::data("omtcodes")
 
   hs <- as.character(hsLevel)
 
