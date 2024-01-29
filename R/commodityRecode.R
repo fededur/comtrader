@@ -17,11 +17,10 @@ commodityRecode <-  function(hsLevel = 6,
                              sopiLevel = `SOPI Forecast Group`,
                              sopiFilter = NULL,
                              query = TRUE) {
-  comtrader::omtcodes
 
   hs <- as.character(hsLevel)
 
-  omtcodes %>%
+  comtrader::omtcodes %>%
     tibble::as_tibble() %>%
     select({{sopiLevel}},{{hs}}) %>%
     {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel}}, ~ . %in% {{sopiFilter}})) else .} %>%
