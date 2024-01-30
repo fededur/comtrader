@@ -17,7 +17,7 @@ hsSopiCheck <- function(ref1, ref2){
   comtrader::omtcodes %>%
     as_tibble() %>%
     select({{ref1}},{{ref2}}) %>%
-    pivot_wider(values_from = 2,
+    tidyr::pivot_wider(values_from = 2,
                 names_from = 2,
                 values_fn = function(x) length(unique(x))) %>%
     replace(is.na(.), 0) %>%
