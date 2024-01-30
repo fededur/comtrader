@@ -5,7 +5,7 @@
 \title{Create named vector for HS codes}
 \usage{
 commodityRecode(
-  hsLevel = 6,
+  hsLevel = `Level 6`,
   sopiLevel = `SOPI Forecast Group`,
   sopiFilter = NULL,
   query = TRUE
@@ -28,5 +28,5 @@ Creates a named vector matching HS codes and SOPI Categories
 Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification.
 }
 \examples{
-commodityRecode(hsLevel = 4, sopiLevel= "SOPI Forecast Group")
+commodityRecode(hsLevel = `Level 4`, sopiLevel= `SOPI Forecast Group`)
 }

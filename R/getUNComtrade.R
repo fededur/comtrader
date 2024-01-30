@@ -46,13 +46,15 @@ getUNComtrade <- function(
 
   formatDate <- function(date, freqCode) {
 
-    ords <- c("%Y%m", "%Y%m%d", "%d%m%Y")
+    ords <- c("%Y%m", "%Y%m%d", "%d%m%Y", "%Y")
 
     date <- lubridate::parse_date_time(date, orders = ords)
 
     fmt <- if(freqCode == "M") "%Y%m" else "%Y"
 
     formatted_dates <- format(date, fmt)
+
+    return(formatted_dates)
   }
 
   period_fmt <- if(!is.null(startDate) && !is.null(endDate)){

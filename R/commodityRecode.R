@@ -12,8 +12,8 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' commodityRecode(hsLevel = 4, sopiLevel= "SOPI Forecast Group")
-commodityRecode <-  function(hsLevel = 6,
+#' commodityRecode(hsLevel = `Level 4`, sopiLevel= `SOPI Forecast Group`)
+commodityRecode <-  function(hsLevel = `Level 6`,
                              sopiLevel = `SOPI Forecast Group`,
                              sopiFilter = NULL,
                              query = TRUE) {

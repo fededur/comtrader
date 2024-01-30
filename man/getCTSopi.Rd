@@ -69,5 +69,5 @@ Custom get function to query data from the UN Comtrade API.
 further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1&operation=get-get`
 }
 \examples{
-getCTSopi(freqCode = "M",cmdCode = "010129" ,reporterCode = 36, startDate = c("2020-01-01"),endDate = "2020-02-01",sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy")
+getCTSopi(freqCode = "M", reporterCode = 36, startDate = "2020-01-01", endDate = "2020-02-01", sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy")
 }

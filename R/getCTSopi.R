@@ -26,7 +26,7 @@
 #' @importFrom purrr map_chr
 #' @export
 #' @examples
-#' getCTSopi(freqCode = "M",cmdCode = "010129" ,reporterCode = 36, startDate = c("2020-01-01"),endDate = "2020-02-01",sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy")
+#' getCTSopi(freqCode = "M", reporterCode = 36, startDate = "2020-01-01", endDate = "2020-02-01", sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy")
 getCTSopi <- function(
     typeCode = "C",
     freqCode = "M",
@@ -52,17 +52,24 @@ getCTSopi <- function(
 
   formatDate <- function(date, freqCode) {
 
-    ords <- c("%Y%m", "%Y%m%d", "%d%m%Y")
+    ords <- c("%Y%m", "%Y%m%d", "%d%m%Y","%Y")
 
     date <- lubridate::parse_date_time(date, orders = ords)
 
     fmt <- if(freqCode == "M") "%Y%m" else "%Y"
 
     formatted_dates <- format(date, fmt)
+
+    return(formatted_dates)
   }
 
+  by_period <- case_when(
+    freqCode == "M" ~ "months",
+    freqCode == "A" ~ "year"
+  )
+
   period_fmt <- if(!is.null(startDate) && !is.null(endDate)){
-    seq(lubridate::ymd(startDate), lubridate::ymd(endDate), by = "months") %>%
+    seq(lubridate::ymd(startDate), lubridate::ymd(endDate), by = by_period) %>%
       map_chr(~formatDate(.x, freqCode)) %>%
       nullToChr()
   } else {

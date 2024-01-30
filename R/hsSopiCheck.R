@@ -8,6 +8,7 @@
 #'
 #' @import dplyr tibble
 #' @importFrom magrittr %>%
+#' @importFrom tidyr pivot_wider
 #' @export
 #' @examples
 #' hsSopiCheck(ref1 = `4`, ref2 = `SOPI Forecast Group`)
