@@ -18,17 +18,15 @@ commodityRecode <-  function(hsLevel = `Level 6`,
                              sopiFilter = NULL,
                              query = TRUE) {
 
-  hs <- as.character(hsLevel)
-
   comtrader::omtcodes %>%
     tibble::as_tibble() %>%
-    select({{sopiLevel}},{{hs}}) %>%
+    select({{sopiLevel}},{{hsLevel}}) %>%
     {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel}}, ~ . %in% {{sopiFilter}})) else .} %>%
     distinct() %>%
     {if(isTRUE({{query}})){
       tibble::deframe(.)
     } else if(isFALSE({{query}})) {
-      select(.,{{hs}},{{sopiLevel}}) %>%
+      select(.,{{hsLevel}},{{sopiLevel}}) %>%
         tibble::deframe()
       }
     }
