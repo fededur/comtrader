@@ -22,43 +22,43 @@ getUNC(
 )
 }
 \arguments{
-\item{typeCode}{Type of trade: C for commodities and S for service}
+\item{typeCode}{Type of trade: C for commodities and S for service.}
 
-\item{freqCode}{Trade frequency: A for annual and M for monthly}
+\item{freqCode}{Trade frequency: A for annual and M for monthly.}
 
 \item{clCode}{Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.}
 
-\item{reporterCode}{Reporter code (Possible values are M49 code of the countries separated by comma (,))}
+\item{reporterCode}{Reporter code (Possible values are M49 code of the countries separated by comma (,)).}
 
-\item{period}{Year or month. Year should be 4 digit year. Month should be six digit integer with the values of the form YYYYMM. Ex: 201002 for 2010 February. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{period}{Year or month. Year should be 4 digit year. Month should be six digit integer with the values of the form YYYYMM. Ex: 201002 for 2010 February. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{partnerCode}{Partner code (Possible values are M49 code of the countries separated by comma (,))}
+\item{partnerCode}{Partner code (Possible values are M49 code of the countries separated by comma (,)).}
 
-\item{partner2Code}{Second partner/consignment code (Possible values are M49 code of the countries separated by comma (,))}
+\item{partner2Code}{Second partner/consignment code (Possible values are M49 code of the countries separated by comma (,)).}
 
-\item{cmdCode}{Commodity code. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{cmdCode}{Commodity code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{flowCode}{Trade flow code. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{flowCode}{Trade flow code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{customsCode}{Customs code. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{customsCode}{Customs code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{motCode}{Mode of transport code. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{motCode}{Mode of transport code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{aggregateBy}{Add parameters in csv list on which you want the results to be aggregated}
+\item{aggregateBy}{Add parameters in csv list on which you want the results to be aggregated.}
 
-\item{breakdownMode}{Mode to choose from}
+\item{breakdownMode}{Mode to choose from.}
 
-\item{includeDesc}{Include descriptions of data variables}
+\item{includeDesc}{Include descriptions of data variables.}
 }
 \value{
-a tibble
+a tibble.
 }
 \description{
-Query data in UN Comtrade API
+Query data in UN Comtrade API.
 }
 \details{
-further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
+further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
 }
 \examples{
-get(period = "202201")
+getUNC(period = "202201", flowCode = "X")
 }

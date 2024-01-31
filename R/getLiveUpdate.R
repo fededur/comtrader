@@ -1,8 +1,8 @@
 #' Get live update data from UN Comtrade Database API
 #'
-#' @description Query progress on data release in the UN Comtrade API
-#' @details further details on API features available at: `https://comtradedeveloper.un.org`
-#' @return a tibble
+#' @description Query progress on data release in the UN Comtrade API.
+#' @details further details on API features available at: `https://comtradedeveloper.un.org`.
+#' @return a tibble.
 #'
 #' @export
 #' @import httr dplyr
@@ -10,6 +10,12 @@
 #' @examples
 #' getLiveUpdate()
 getLiveUpdate <- function(){
+
+  if(is.null(comtrader::get_uncomtrade_key())){
+
+    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+
+  }
 
   res <- httr::GET(
     url = "https://comtradeapi.un.org/data/v1/getLiveUpdate/",

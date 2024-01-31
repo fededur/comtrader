@@ -1,29 +1,35 @@
-#' Identify conflicts between HS codes and SOPI categories
+#' Identify conflicts between two categories in a table
 #'
-#' @description Reads `omtcodes` and creates a wide table of HS codes and counts of matching SOPI Categories (or viceversa).
-#' @param ref1 reference code 1 E.g.: NZHSC level code (either `2`, `4` or `6`)
-#' @param ref2 reference code 2 E.g.: SOPI category level (either `Primary Industry Sector`,`SOPI Forecast Group` or `Granular Group`)
+#' @description Creates a table of counts of matching categories between two columns of a table.
+#' @details the table is built with reference to the `ref1` argument.
+#' @param .data a table to read data from. Defaults to `omtcodes`.
+#' @param ref1 first reference column.
+#' @param ref2 second reference column.
 #'
-#' @return a tibble
+#' @return a tibble.
 #'
 #' @import dplyr tibble
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @export
 #' @examples
-#' hsSopiCheck(ref1 = `4`, ref2 = `SOPI Forecast Group`)
-hsSopiCheck <- function(ref1, ref2){
+#' cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI Forecast Group`)
+cCheck <- function(.data = comtrader::omtcodes, ref1, ref2){
 
-  comtrader::omtcodes %>%
+  ref1_quo <- enquo(ref1)
+  ref2_quo <- enquo(ref2)
+
+  {{.data}} %>%
     as_tibble() %>%
-    select({{ref1}},{{ref2}}) %>%
-    tidyr::pivot_wider(values_from = 2,
-                names_from = 2,
-                values_fn = function(x) length(unique(x))) %>%
+    select({{ref1_quo}},{{ref2_quo}}) %>%
+    tidyr::pivot_wider(values_from = {{ref2_quo}},
+                       names_from = {{ref2_quo}},
+                       values_fn = function(x) length(unique(x))) %>%
     replace(is.na(.), 0) %>%
-    group_by_at(1) %>%
-    mutate(category = paste0(names(.[-1])[as.logical(cur_data())], collapse = ', ')) %>%
+    group_by({{ref1_quo}}) %>%
+    mutate("{{ref2_quo}}" := paste0(names(.[-1])[as.logical(cur_data())], collapse = ", ")) %>%
     ungroup() %>%
-    mutate(category_count = rowSums(across(-c(1, category)), na.rm=TRUE)) %>%
-    select(1, category, category_count)
+    mutate(count = rowSums(across(-c({{ref1_quo}},{{ref2_quo}})), na.rm = TRUE)) %>%
+    select({{ref1_quo}},{{ref2_quo}},count) %>%
+    arrange(desc(count))
 }

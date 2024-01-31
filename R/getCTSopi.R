@@ -46,6 +46,12 @@ getCTSopi <- function(
     sopiFilter = NULL,
     hs = `Level 6`){
 
+  if(is.null(comtrader::get_uncomtrade_key())){
+
+    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+
+  }
+
   hs_quo <- rlang::enquo(hs)
 
   nullToChr <- function(x) if(is.null(x)) NULL else if(!is.null(x))  paste0(x, collapse = ",")
