@@ -44,7 +44,7 @@ getCTSopi <- function(
     includeDesc = TRUE,
     sopiLevel = `SOPI Forecast Group`,
     sopiFilter = NULL,
-    hs = `Level 6`){
+    hs = NZHSCLevel6){
 
   if(is.null(comtrader::get_uncomtrade_key())){
 

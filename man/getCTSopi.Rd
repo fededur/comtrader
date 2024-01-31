@@ -21,7 +21,7 @@ getCTSopi(
   includeDesc = TRUE,
   sopiLevel = `SOPI Forecast Group`,
   sopiFilter = NULL,
-  hs = `Level 6`
+  hs = NZHSCLevel6
 )
 }
 \arguments{
