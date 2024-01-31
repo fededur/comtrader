@@ -5,12 +5,12 @@
 \alias{omtcodes}
 \title{Prepare data to match Comtrade and SOPI HS codes}
 \format{
-An object of class \code{data.frame} with 2293 rows and 6 columns.
+An object of class \code{data.frame} with 1646 rows and 6 columns.
 
-a tibble with HS code levels 2, 4 and 6 and matching SOPI category levels
+a tibble with HS code levels 4 and 6 and matching SOPI category levels. The SOPI_group_HS6 category contains custom categories.
 }
 \source{
-Power BI OMT extract
+NZHSC
 }
 \usage{
 omtcodes
@@ -20,4 +20,5 @@ omtcodes
 \description{
 Dataset with Comtrade and SOPI HS codes
 }
+\keyword{data}
 \keyword{datasets}

@@ -16,8 +16,8 @@
 #' @param aggregateBy Add parameters in the form of a character vector on which you want the results to be aggregated.
 #' @param breakdownMode Mode to choose from.
 #' @param includeDesc Include descriptions of data variables.
-#' @param sopiLevel SOPI level column in `omtcodes`. E.g. `Primary Industry Sector`.
-#' @param sopiFilter character string to filter SOPI level. E.g.: "Dairy.
+#' @param sopiLevel SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`).
+#' @param sopiFilter character string to filter SOPI level (e.g.: "Dairy").
 #' @param hs HS code level column in `omtcodes`. E.g.: `Level 6`.
 #' @return a tibble
 #'
@@ -124,6 +124,8 @@ getCTSopi <- function(
     mutate({{sopiLevel}} := dplyr::recode(cmdCode, !!!sopi_descriptor))
 
   if(nrow(dt) == 100000) warning("dataset may be truncated")
+
+  if(nrow(dt) == 100000) cat("Your query yielded no result\n")
 
   return(dt)
 }

@@ -23,5 +23,5 @@ Creates a table of counts of matching categories between two columns of a table.
 the table is built with reference to the `ref1` argument.
 }
 \examples{
-cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI Forecast Group`)
+cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
 }

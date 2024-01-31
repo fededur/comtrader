@@ -53,9 +53,9 @@ getCTSopi(
 
 \item{includeDesc}{Include descriptions of data variables.}
 
-\item{sopiLevel}{SOPI level column in `omtcodes`. E.g. `Primary Industry Sector`.}
+\item{sopiLevel}{SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`).}
 
-\item{sopiFilter}{character string to filter SOPI level. E.g.: "Dairy.}
+\item{sopiFilter}{character string to filter SOPI level (e.g.: "Dairy").}
 
 \item{hs}{HS code level column in `omtcodes`. E.g.: `Level 6`.}
 }

@@ -2,10 +2,10 @@
 #'
 #' @import dplyr stringr
 #' @export
-omtcodes <- read.csv("data/HS_codes_OMT.csv", check.names = F, stringsAsFactors = F) %>%
-  mutate(NZHSCLevel2 = stringr::str_pad(`NZHSC Code Hierarchy - NZHSC Level 2 Code` , width = 2, pad = "0"),
-         NZHSCLevel4 = stringr::str_pad(`NZHSC Code Hierarchy - NZHSC Level 4 Code` , width = 4, pad = "0"),
-         NZHSCLevel6 = stringr::str_pad(`NZHSC Code Hierarchy - NZHSC Level 6 Code` , width = 6, pad = "0")) %>%
-  select(NZHSCLevel2,NZHSCLevel4,NZHSCLevel6,`Primary Industry Sector`,`SOPI Forecast Group`,`Granular Group`)
+omtcodes <- read.csv("data/SOPI Group HS6 level.csv", check.names = F, stringsAsFactors = F) %>%
+  mutate(NZHSCLevel4 = sprintf("%04d", NZHSCLevel4),
+         NZHSCLevel6 = sprintf("%06d", NZHSCLevel6)) %>%
+  rename(SOPI_group_HS6 = "SOPI_group _HS6") %>%
+  select(`Primary Industry Sector`,NZHSCLevel4,NZHSCLevel4Desc,NZHSCLevel6,NZHSCLevel6Desc,SOPI_group_HS6)
 
 save(omtcodes, file = "data/omtcodes.Rds")

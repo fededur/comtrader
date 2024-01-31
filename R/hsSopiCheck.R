@@ -13,7 +13,7 @@
 #' @importFrom tidyr pivot_wider
 #' @export
 #' @examples
-#' cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI Forecast Group`)
+#' cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
 cCheck <- function(.data = comtrader::omtcodes, ref1, ref2){
 
   ref1_quo <- enquo(ref1)
