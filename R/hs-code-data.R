@@ -1,6 +1,6 @@
-#' Prepare data to match Comtrade and SOPI HS codes
+#' NZHSC codes and SOPI descriptions
 #'
-#' @import dplyr stringr
+#' @import dplyr
 #' @export
 omtcodes <- read.csv("data/SOPI Group HS6 level.csv", check.names = F, stringsAsFactors = F) %>%
   mutate(NZHSCLevel4 = sprintf("%04d", NZHSCLevel4),
