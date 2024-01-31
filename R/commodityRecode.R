@@ -2,8 +2,8 @@
 #'
 #' @description Creates a named vector matching HS codes and SOPI Categories
 #' @details Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification.
-#' @param hsLevel NZHSC level code (either 2, 4 or 6)
-#' @param sopiLevel SOPI category level (either `Primary Industry Sector`,`SOPI Forecast Group` or `Granular Group`)
+#' @param hsLevel NZHSC level code (either NZHSCLevel2, NZHSCLevel4 or NZHSCLevel6)
+#' @param sopiLevel SOPI category level (either `Primary Industry Sector` or `SOPI Forecast Group`)
 #' @param query If `TRUE` returns a vector of commodity codes (`cmdCode`) to use in a query. If `FALSE` returns a vector of `sopiLevel` names associated with the commodity code.
 #'
 #' @return a named vector
@@ -12,8 +12,8 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' commodityRecode(hsLevel = `Level 4`, sopiLevel= `SOPI Forecast Group`)
-commodityRecode <-  function(hsLevel = `Level 6`,
+#' commodityRecode(hsLevel = NZHSCLevel6, sopiLevel= `SOPI Forecast Group`)
+commodityRecode <-  function(hsLevel = NZHSCLevel6,
                              sopiLevel = `SOPI Forecast Group`,
                              sopiFilter = NULL,
                              query = TRUE) {

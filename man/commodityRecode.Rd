@@ -5,16 +5,16 @@
 \title{Create named vector for HS codes}
 \usage{
 commodityRecode(
-  hsLevel = `Level 6`,
+  hsLevel = NZHSCLevel6,
   sopiLevel = `SOPI Forecast Group`,
   sopiFilter = NULL,
   query = TRUE
 )
 }
 \arguments{
-\item{hsLevel}{NZHSC level code (either 2, 4 or 6)}
+\item{hsLevel}{NZHSC level code (either NZHSCLevel2, NZHSCLevel4 or NZHSCLevel6)}
 
-\item{sopiLevel}{SOPI category level (either `Primary Industry Sector`,`SOPI Forecast Group` or `Granular Group`)}
+\item{sopiLevel}{SOPI category level (either `Primary Industry Sector` or `SOPI Forecast Group`)}
 
 \item{query}{If `TRUE` returns a vector of commodity codes (`cmdCode`) to use in a query. If `FALSE` returns a vector of `sopiLevel` names associated with the commodity code.}
 }
@@ -28,5 +28,5 @@ Creates a named vector matching HS codes and SOPI Categories
 Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification.
 }
 \examples{
-commodityRecode(hsLevel = `Level 4`, sopiLevel= `SOPI Forecast Group`)
+commodityRecode(hsLevel = NZHSCLevel6, sopiLevel= `SOPI Forecast Group`)
 }
