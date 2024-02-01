@@ -125,7 +125,7 @@ getCTSopi <- function(
 
   if(nrow(dt) == 100000) warning("dataset may be truncated")
 
-  if(nrow(dt) == 100000) cat("Your query yielded no result\n")
+  if(nrow(dt) == 0) cat("Your query yielded no result\n")
 
   return(dt)
 }
