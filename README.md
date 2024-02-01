@@ -34,14 +34,14 @@ You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** 
   - **getDaTariffline** return tibble containing tariff line dataset availability based on query.
   
 - Metadata: Model class to extract meta data into tibble.
- - **getLiveUpdate** return tibble containing progress on UN Comtrade data release.
- - **getMeatadata** return tibble containing comtrade metadata.
+  - **getLiveUpdate** return tibble containing progress on UN Comtrade data release.
+  - **getMeatadata** return tibble containing comtrade metadata.
  
 - SUV: Model class to extract data on Standard Unit Values (SUV) and their ranges.
- - **getSUV** return tibble containing SUV data based on query.
+  - **getSUV** return tibble containing SUV data based on query.
 
 - Data: tibble containing data to support querying.
- - **omtcodes** contains NZHSC and SOPI codes and categories to assist in querying the data.
+  - **omtcodes** contains NZHSC and SOPI codes and categories to assist in querying the data.
  
 ## Arguments to use in comtrader functions: 
 
@@ -73,7 +73,12 @@ This is a basic example which shows you how to solve a common query:
 library(comtrader)
 set_uncomtrade_key(key = "****************")
 
-dairydata <- getCTSopi(freqCode = "A", flowCode = "X", startDate = "2020-01-01", endDate = "2023-05-01", sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy")
+dairydata <- getCTSopi(freqCode = "A",
+  flowCode = "X",
+  startDate = "2020-01-01",
+  endDate = "2023-05-01",
+  sopiLevel = `Primary Industry Sector`,
+  sopiFilter = "Dairy")
 
 ```
 
