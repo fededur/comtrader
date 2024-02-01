@@ -1,12 +1,12 @@
 #' Get meta data from UN Comtrade Database API
 #'
-#' @description Query meta data in the UN Comtrade API
-#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
-#' @param typeCode Type of trade: C for commodities and S for service
-#' @param freqCode Trade frequency: A for annual and M for monthly
+#' @description Query meta data in the UN Comtrade API.
+#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
+#' @param typeCode Type of trade: C for commodities and S for service.
+#' @param freqCode Trade frequency: A for annual and M for monthly.
 #' @param clCode Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.
 #'
-#' @return a tibble
+#' @return a tibble.
 #'
 #' @export
 #' @import httr dplyr
@@ -17,6 +17,12 @@ getMetadata <- function(
     typeCode = "C",
     freqCode = "M",
     clCode = "HS"){
+
+  if(is.null(comtrader::get_uncomtrade_key())){
+
+    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+
+  }
 
   formals_list <- mget(names(formals()), sys.frame(sys.nframe()))
 

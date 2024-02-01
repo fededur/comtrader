@@ -15,28 +15,28 @@ getSUV(
 )
 }
 \arguments{
-\item{typeCode}{Type of trade: C for commodities and S for service}
+\item{typeCode}{Type of trade: C for commodities and S for service.}
 
-\item{freqCode}{Trade frequency: A for annual and M for monthly}
+\item{freqCode}{Trade frequency: A for annual and M for monthly.}
 
 \item{clCode}{Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.}
 
-\item{period}{Year or month. Year should be 4 digit year. Month should be six digit integer with the values of the form YYYYMM. Ex: 201002 for 2010 February. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{period}{Year or month. Year should be 4 digit year. Month should be six digit integer with the values of the form YYYYMM. Ex: 201002 for 2010 February. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{cmdCode}{Commodity code. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{cmdCode}{Commodity code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{flowCode}{Trade flow code. Multi value input should be in the form of csv (Codes separated by comma (,))}
+\item{flowCode}{Trade flow code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
 
-\item{qtyUnitCode}{Quantity Unit Code}
+\item{qtyUnitCode}{Quantity Unit Code.}
 }
 \value{
-a tibble
+a tibble.
 }
 \description{
-Get SUV function for UN Comtrade Database API
+Get SUV function for UN Comtrade Database API.
 }
 \details{
-further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
+further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
 }
 \examples{
 getSUV(period = "202201")

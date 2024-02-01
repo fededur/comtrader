@@ -25,6 +25,12 @@ getDaTariffline <- function(
     publishedDateFrom,
     publishedDateTo){
 
+  if(is.null(comtrader::get_uncomtrade_key())){
+
+    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+
+  }
+
   formals_list <- mget(names(formals()), sys.frame(sys.nframe()))
 
   null_formals <- names(formals_list)[sapply(formals_list, is.null)]

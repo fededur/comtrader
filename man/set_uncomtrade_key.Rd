@@ -4,10 +4,10 @@
 \alias{set_uncomtrade_key}
 \title{Set package key for UNComprade API}
 \usage{
-set_uncomtrade_key(value)
+set_uncomtrade_key(key)
 }
 \arguments{
-\item{value}{The value to set as the key}
+\item{key}{The value to set as the key}
 }
 \description{
 Set package key for UNComprade API
