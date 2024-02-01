@@ -24,7 +24,7 @@ You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** 
   - **set_uncomtrade_key** set the API key before calling any other function.
   - **get_uncomtrade_key** retrieve the API key that is currently loaded in your system.
 
-- Get: Model class to extract the data into R tibble
+- Get: Model class to extract the data into tibble.
   - **getCTSopi** return tibble containing trade data based on query using SOPI categories.
   - **getUNC** return tibble containing trade data based on query.
   - **getTariffline** return tibble containing tariff line data based on query.
@@ -33,14 +33,14 @@ You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** 
   - **getDa** return tibble containing trade dataset availability based on query.
   - **getDaTariffline** return tibble containing tariff line dataset availability based on query.
   
-- Metadata
+- Metadata: Model class to extract meta data into tibble.
  - **getLiveUpdate** return tibble containing progress on UN Comtrade data release.
  - **getMeatadata** return tibble containing comtrade metadata.
  
 - SUV: Model class to extract data on Standard Unit Values (SUV) and their ranges.
  - **getSUV** return tibble containing SUV data based on query.
 
-- Data
+- Data: tibble containing data to support querying.
  - **omtcodes** contains NZHSC and SOPI codes and categories to assist in querying the data.
  
 ## Arguments to use in comtrader functions: 
