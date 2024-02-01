@@ -2,7 +2,7 @@
 #'
 #' @import dplyr
 #' @export
-omtcodes <- read.csv("data/SOPI Group HS6 level.csv", check.names = F, stringsAsFactors = F) %>%
+omtcodes <- read.csv("data/SOPI_Group_HS6_level.csv", check.names = F, stringsAsFactors = F) %>%
   mutate(NZHSCLevel4 = sprintf("%04d", NZHSCLevel4),
          NZHSCLevel6 = sprintf("%06d", NZHSCLevel6)) %>%
   rename(SOPI_group_HS6 = "SOPI_group _HS6") %>%
