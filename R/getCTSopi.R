@@ -18,7 +18,7 @@
 #' @param includeDesc Include descriptions of data variables.
 #' @param sopiLevel SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`).
 #' @param sopiFilter character string to filter SOPI level (e.g.: "Dairy").
-#' @param hs HS code level column in `omtcodes`. E.g.: `Level 6`.
+#' @param hs HS code level column in `omtcodes` (e.g.: `NZHSCLevel6`.
 #' @return a tibble
 #'
 #' @import httr dplyr lubridate

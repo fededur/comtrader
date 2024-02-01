@@ -57,7 +57,7 @@ getCTSopi(
 
 \item{sopiFilter}{character string to filter SOPI level (e.g.: "Dairy").}
 
-\item{hs}{HS code level column in `omtcodes`. E.g.: `Level 6`.}
+\item{hs}{HS code level column in `omtcodes` (e.g.: `NZHSCLevel6`.}
 }
 \value{
 a tibble
