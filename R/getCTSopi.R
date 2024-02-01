@@ -42,7 +42,7 @@ getCTSopi <- function(
     aggregateBy = NULL,
     breakdownMode = "classic",
     includeDesc = TRUE,
-    sopiLevel = `SOPI Forecast Group`,
+    sopiLevel = SOPI_group_HS6,
     sopiFilter = NULL,
     hs = NZHSCLevel6){
 
