@@ -19,7 +19,7 @@ getCTSopi(
   aggregateBy = NULL,
   breakdownMode = "classic",
   includeDesc = TRUE,
-  sopiLevel = SOPI_group_HS6,
+  sopiLevel = `Primary Industry Sector`,
   sopiFilter = NULL,
   hs = NZHSCLevel6
 )
