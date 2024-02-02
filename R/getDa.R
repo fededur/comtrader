@@ -51,7 +51,7 @@ getDa <- function(
     url = paste0("https://comtradeapi.un.org/data/v1/getDa/",domain_string,"?",query_string),
     httr::add_headers("Ocp-Apim-Subscription-Key" = get_uncomtrade_key()))
 
-  dt <- httr::content(res) %>%
+  dt <- httr::content(res, encoding = "UTF-8") %>%
     purrr::pluck("data") %>%
     bind_rows()
 
