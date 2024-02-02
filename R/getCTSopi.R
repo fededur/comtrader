@@ -123,7 +123,7 @@ getCTSopi <- function(
   dt <- httr::content(res, encoding = "UTF-8") %>%
     purrr::pluck("data") %>%
     bind_rows() %>%
-    mutate({{sopiLevel_quo}} := dplyr::recode(cmdCode, !!!sopi_descriptor))
+    mutate("{{sopiLevel_quo}}" := dplyr::recode(cmdCode, !!!sopi_descriptor))
 
   if(nrow(dt) == 100000) warning("dataset may be truncated")
 
