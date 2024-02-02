@@ -42,7 +42,7 @@ getCTSopi <- function(
     aggregateBy = NULL,
     breakdownMode = "classic",
     includeDesc = TRUE,
-    sopiLevel = SOPI_group_HS6,
+    sopiLevel = `Primary Industry Sector`,
     sopiFilter = NULL,
     hs = NZHSCLevel6){
 
@@ -112,13 +112,13 @@ getCTSopi <- function(
       aggregateBy = nullToChr(aggregateBy),
       breakdownMode = breakdownMode,
       includeDesc = includeDesc),
-    add_headers("Ocp-Apim-Subscription-Key" = get_uncomtrade_key()))
+    httr::add_headers("Ocp-Apim-Subscription-Key" = get_uncomtrade_key()))
 
   cat("URL:", gsub("[?]$","",url), "\n")
 
   cat("Status code:", httr::status_code(res), "\n")
 
-  dt <- content(res) %>%
+  dt <- httr::content(res, encoding = "UTF-8") %>%
     purrr::pluck("data") %>%
     bind_rows() %>%
     mutate({{sopiLevel}} := dplyr::recode(cmdCode, !!!sopi_descriptor))

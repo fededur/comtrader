@@ -17,7 +17,8 @@ devtools::install_github("fduranov/comtrader", auth_token = "***********")
 Contact Federico at <federico.duranovich@mpi.govt> for the authentication token.
 
 ## Prerequisites
-You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** to be able to connect to the API. 
+You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** to be able to connect to the API.<br/>
+For further information you can visit the [UN Comtrade Wiki](https://unstats.un.org/wiki/display/comtrade/UN+Comtrade+Wiki).
 
 ## Components
 - API access key
