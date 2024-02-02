@@ -52,6 +52,8 @@ getCTSopi <- function(
 
   }
 
+  sopiLevel_quo <-rlang::enquo(sopiLevel)
+
   hs_quo <- rlang::enquo(hs)
 
   nullToChr <- function(x) if(is.null(x)) NULL else if(!is.null(x))  paste0(x, collapse = ",")
@@ -85,15 +87,15 @@ getCTSopi <- function(
 
   QueryCodes <- comtrader::omtcodes %>%
     tibble::as_tibble() %>%
-    select({{sopiLevel}},{{hs_quo}}) %>%
-    {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel}}, ~ . %in% {{sopiFilter}})) else .} %>%
+    select({{sopiLevel_quo}},{{hs_quo}}) %>%
+    {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel_quo}}, ~ . %in% {{sopiFilter}})) else .} %>%
     distinct()
 
   cmdCode <- QueryCodes %>%
     pull({{hs_quo}})
 
   sopi_descriptor <- QueryCodes %>%
-    select({{hs_quo}},{{sopiLevel}}) %>%
+    select({{hs_quo}},{{sopiLevel_quo}}) %>%
     tibble::deframe(.)
 
   url <-  paste0("https://comtradeapi.un.org/data/v1/get/",typeCode,"/",freqCode,"/",clCode,"?")
@@ -121,7 +123,7 @@ getCTSopi <- function(
   dt <- httr::content(res, encoding = "UTF-8") %>%
     purrr::pluck("data") %>%
     bind_rows() %>%
-    mutate({{sopiLevel}} := dplyr::recode(cmdCode, !!!sopi_descriptor))
+    mutate({{sopiLevel_quo}} := dplyr::recode(cmdCode, !!!sopi_descriptor))
 
   if(nrow(dt) == 100000) warning("dataset may be truncated")
 
