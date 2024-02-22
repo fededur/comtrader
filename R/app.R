@@ -7,7 +7,7 @@
 app <- function(...){
 
   ui <- div(style="width: auto !important; heightauto !important; background-color: #73737a",
-            div(titlePanel("comtrader::app"), style='background-color: #454547; padding:12px 20px; color:white; font-size:120%; text-align:right'),
+            div(titlePanel("comtrader"), style='background-color: #454547; padding:12px 20px; color:white; font-size:120%; text-align:right'),
             fluidPage(
               div(sidebarLayout(
                 div(sidebarPanel(
@@ -22,7 +22,6 @@ app <- function(...){
                     airDatepickerInput(inputId = "period", label = h4("Period"), multiple = TRUE, clearButton = TRUE, dateFormat = "yyyy MM",maxDate = Sys.Date()),
                     br(),
                     actionButton("sq", "Submit Query", style='padding:15px 30px; font-size:120%; background-color:#007bb8; color:white; width:100%'),
-                    br(),
                     br(),
                     downloadButton("download","Download Data", style='padding:15px 30px; font-size:120%; background-color:#a6c5f7; color:white; width:100%')
                   )
