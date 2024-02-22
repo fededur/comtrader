@@ -18,6 +18,8 @@ Imports:
     lubridate (>= 1.9.2),
     magrittr,
     purrr (>= 1.0.1),
+    shiny,
+    shinyWidgets,
     stringr (>= 1.5.0),
     tibble (>= 3.2.1),
     tidyr
