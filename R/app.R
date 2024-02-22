@@ -7,12 +7,12 @@
 app <- function(...){
 
   ui <- div(style="width: auto !important; heightauto !important; background-color: #73737a",
-            div(titlePanel("comtrader::app"), style='background-color: #454547;padding:12px 20px;color:white;'),
+            div(titlePanel("comtrader::app"), style='background-color: #454547; padding:12px 20px; color:white; font-size:120%'),
             fluidPage(
               div(sidebarLayout(
                 div(sidebarPanel(
                   fluidRow(
-                    actionButton("keyDialog", "Set API key", style='padding:15px 30px; background-color:#93b6c9; font-size:120%; width:100%; color:white'),
+                    actionButton("keyDialog", "Set API key", style='padding:15px 30px; background-color:#a6c5f7; font-size:120%; width:100%; color:white; text-align:right'),
                     selectInput("sopilevel", h4("SOPI Level"), choices = unique(hscodeshiny$sopiLevel)),
                     selectInput("sopifilter", h4("Sopi Filter"), choices = NULL, multiple = TRUE, selected = "All SOPI categories"),
                     selectInput("flow", h4("Trade flow"), choices = list("Exports" = "X", "Re-exports" = "RX", "Imports" = "M", "Re-imports" = "RM"), multiple = TRUE),
@@ -21,14 +21,15 @@ app <- function(...){
                     radioButtons("frequency", h4("Frequency"), choices = list("Monthly" = "M", "Annual" = "A"), inline=TRUE),
                     airDatepickerInput(inputId = "period", label = h4("Period"), multiple = TRUE, clearButton = TRUE, dateFormat = "yyyy MM",maxDate = Sys.Date()),
                     br(),
-                    actionButton("sq", "Submit Query", style='padding:15px 30px; font-size:120%; background-color:#007bb8; color:white; width:100%' )
+                    actionButton("sq", "Submit Query", style='padding:15px 30px; font-size:120%; background-color:#007bb8; color:white; width:100%'),
+                    br(),
+                    downloadButton("download","Download Data", style='padding:15px 30px; font-size:120%; background-color:#a6c5f7; color:white; width:100%')
                   )
                 ),
                 style='width:100%; padding:0px 0px'),
 
                 mainPanel(
-                  div(tableOutput("qt"), style = "max-height: 400px; overflow-y: auto; max-width: auto; overflow-x: auto; background-color:white"),
-                  downloadButton("download","Download Data")
+                  div(tableOutput("qt"), style = "max-height: 800px; overflow-y:auto; max-width: auto; overflow-x: auto; background-color:white")
                 )
               )
             )

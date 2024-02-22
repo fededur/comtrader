@@ -21,7 +21,20 @@ You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** 
 For further information you can visit the [UN Comtrade Wiki](https://unstats.un.org/wiki/display/comtrade/UN+Comtrade+Wiki).
 
 ## Components
-- API access key
+
+### Shiny app
+- comtrader shiny app.
+  - **app** shiny app wrapper function.
+
+To launch the app run:
+
+``` r
+library(comtrader)
+app()
+```
+
+### Functions
+- API access key.
   - **set_uncomtrade_key** set the API key before calling any other function.
   - **get_uncomtrade_key** retrieve the API key that is currently loaded in your system.
 
@@ -29,6 +42,7 @@ For further information you can visit the [UN Comtrade Wiki](https://unstats.un.
   - **getCTSopi** return tibble containing trade data based on query using SOPI categories.
   - **getUNC** return tibble containing trade data based on query.
   - **getTariffline** return tibble containing tariff line data based on query.
+  - **ctApp** return tibble containing trade data based on query using SOPI categories. 
   
 - DataAvailability: Model class to extract data availability
   - **getDa** return tibble containing trade dataset availability based on query.
@@ -43,6 +57,8 @@ For further information you can visit the [UN Comtrade Wiki](https://unstats.un.
 
 - Data: tibble containing data to support querying.
   - **omtcodes** contains NZHSC and SOPI codes and categories to assist in querying the data.
+  - **hscodeshiny** contains NZHSC and SOPI codes and categories to assist in querying by comtrader shiny app.
+  - **countryshiny** contains a named list of country codes to use in comtrader shiny app.
  
 ## Arguments to use in comtrader functions: 
 
