@@ -7,12 +7,12 @@
 app <- function(...){
 
   ui <- div(style="width: auto !important; heightauto !important; background-color: #73737a",
-            div(titlePanel("comtrader::app"), style='background-color: #454547; padding:12px 20px; color:white; font-size:120%'),
+            div(titlePanel("comtrader::app"), style='background-color: #454547; padding:12px 20px; color:white; font-size:120%; text-align:right'),
             fluidPage(
               div(sidebarLayout(
                 div(sidebarPanel(
                   fluidRow(
-                    actionButton("keyDialog", "Set API key", style='padding:15px 30px; background-color:#a6c5f7; font-size:120%; width:100%; color:white; text-align:right'),
+                    actionButton("keyDialog", "Set API key", style='padding:15px 30px; background-color:#a6c5f7; font-size:120%; width:100%; color:white'),
                     selectInput("sopilevel", h4("SOPI Level"), choices = unique(hscodeshiny$sopiLevel)),
                     selectInput("sopifilter", h4("Sopi Filter"), choices = NULL, multiple = TRUE, selected = "All SOPI categories"),
                     selectInput("flow", h4("Trade flow"), choices = list("Exports" = "X", "Re-exports" = "RX", "Imports" = "M", "Re-imports" = "RM"), multiple = TRUE),
@@ -22,6 +22,7 @@ app <- function(...){
                     airDatepickerInput(inputId = "period", label = h4("Period"), multiple = TRUE, clearButton = TRUE, dateFormat = "yyyy MM",maxDate = Sys.Date()),
                     br(),
                     actionButton("sq", "Submit Query", style='padding:15px 30px; font-size:120%; background-color:#007bb8; color:white; width:100%'),
+                    br(),
                     br(),
                     downloadButton("download","Download Data", style='padding:15px 30px; font-size:120%; background-color:#a6c5f7; color:white; width:100%')
                   )
