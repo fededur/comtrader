@@ -6,33 +6,35 @@
 #' @export
 app <- function(...){
 
-  ui <- div(style="width: auto !important; heightauto !important; background-color: #73737a",
-            div(titlePanel("comtrader"), style='background-color: #454547; padding:12px 20px; color:white; font-size:120%; text-align:right'),
-            fluidPage(
+  ui <- div(style="background-color: #73737a !important; overflow-y:visible !important; overflow-x:visible !important; width:100%; height:100%",
+            div(titlePanel("comtrader"), style='background-color: #454547; padding:5px 5px; color:white; font-size:120%; text-align:right'),
+            div(fluidPage(
               div(sidebarLayout(
                 div(sidebarPanel(
-                  fluidRow(
-                    actionButton("keyDialog", "Set API key", style='padding:15px 30px; background-color:#a6c5f7; font-size:120%; width:100%; color:white'),
-                    selectInput("sopilevel", h4("SOPI Level"), choices = unique(hscodeshiny$sopiLevel)),
-                    selectInput("sopifilter", h4("Sopi Filter"), choices = NULL, multiple = TRUE, selected = "All SOPI categories"),
-                    selectInput("flow", h4("Trade flow"), choices = list("Exports" = "X", "Re-exports" = "RX", "Imports" = "M", "Re-imports" = "RM"), multiple = TRUE),
-                    selectInput("country", h4("Country"), choices =  countryshiny[-1], multiple = TRUE),
-                    selectInput("partner", h4("Trade partner"), choices =  countryshiny, multiple = TRUE),
-                    radioButtons("frequency", h4("Frequency"), choices = list("Monthly" = "M", "Annual" = "A"), inline=TRUE),
-                    airDatepickerInput(inputId = "period", label = h4("Period"), multiple = TRUE, clearButton = TRUE, dateFormat = "yyyy MM",maxDate = Sys.Date()),
+                  div(fluidRow(
+                    actionButton("keyDialog", "Set API key", style='padding:5px 10px; background-color:#a6c5f7; font-size:120%; width:100%; color:white'),
+                    hr(),
+                    selectInput("sopilevel", "SOPI Level", choices = unique(hscodeshiny$sopiLevel)),
+                    selectInput("sopifilter", "Sopi Filter", choices = NULL, multiple = TRUE, selected = "All SOPI categories"),
+                    selectInput("flow", "Trade flow", choices = list("Exports" = "X", "Re-exports" = "RX", "Imports" = "M", "Re-imports" = "RM"), multiple = TRUE),
+                    selectInput("country", "Country", choices =  countryshiny[-1], multiple = TRUE),
+                    selectInput("partner", "Trade partner", choices =  countryshiny, multiple = TRUE),
+                    radioButtons("frequency", "Frequency", choices = list("Monthly" = "M", "Annual" = "A"), inline=TRUE),
+                    airDatepickerInput(inputId = "period", label = "Period", multiple = TRUE, clearButton = TRUE, maxDate = Sys.Date()),
+                    hr(),
+                    actionButton("sq", "Submit Query", style='padding:5px 10px; font-size:120%; background-color:#007bb8; color:white; width:100%'),
                     br(),
-                    actionButton("sq", "Submit Query", style='padding:15px 30px; font-size:120%; background-color:#007bb8; color:white; width:100%'),
-                    br(),
-                    downloadButton("download","Download Data", style='padding:15px 30px; font-size:120%; background-color:#a6c5f7; color:white; width:100%')
-                  )
+                    downloadButton("download","Download Data", style='padding:5px 10px; font-size:120%; background-color:#a6c5f7; color:white; width:100%')
+                  ),style='padding:5px 5px'),
+                  style='font-size:11px'
                 ),
-                style='width:100%; padding:0px 0px'),
-
+                style='padding:1% 1%'
+                ),
                 mainPanel(
-                  div(tableOutput("qt"), style = "max-height: 800px; overflow-y:auto; max-width: auto; overflow-x: auto; background-color:white")
+                  div(tableOutput("qt"), style = "max-height: 60%; width:80%; overflow-y:auto; overflow-x:auto; background-color:white")
                 )
               )
-            )
+            ), style = "overflow-y:visible; overflow-x:visible")
           )
         )
   # server logic ----
@@ -84,10 +86,16 @@ app <- function(...){
              "A" = "years")
     })
 
+    dateFormat_fmt <- eventReactive(input$frequency, {
+      switch(input$frequency,
+             "M" = "yyyy MM",
+             "A" = "yyyy")
+    })
+
     observe({
       updateAirDateInput(session = session,
                          inputId =  "period",
-                         options = list(view = "years",minView = min_view_fmt()))
+                         options = list(view = "years",minView = min_view_fmt(), dateFormat = dateFormat_fmt()))
     })
 
     period_input <- reactive({
@@ -107,14 +115,25 @@ app <- function(...){
         pull(code) %>%
         unique()
 
+      sopilevel_quoname <- rlang::quo_name(input$sopilevel)
+
+      hscodes <- omtcodes %>%
+        select(NZHSCLevel6,{{sopilevel_quoname}}) %>%
+        deframe()
+
       query_table <- ctApp(freqCode = input$frequency,
+                           #
+                           cmdCode = hs,
+                           #
                            period = period_input(),
                            reporterCode = input$country,
                            partnerCode = input$partner,
                            flowCode = input$flow,
-                           includeDesc = input$description,
+                           #includeDesc = input$description,
                            uncomtrade_key = rv$key_input
-      )
+      ) #%>%
+        #mutate("{sopilevel_quoname}" := dplyr::recode(cmdCode, !!!hscodes))
+
       return(query_table)
     })
 
@@ -123,6 +142,7 @@ app <- function(...){
     output$qt <- renderTable({
       query_result()
     },
+    #width = "100%",
     spacing ="xs")
 
     output$download <- downloadHandler(

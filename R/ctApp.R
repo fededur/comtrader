@@ -70,8 +70,13 @@ ctApp <- function(
 
   dt <- httr::content(res, encoding = "UTF-8") %>%
     purrr::pluck("data") %>%
-    bind_rows() #%>%
-  #mutate("{{input$}}" := dplyr::recode(cmdCode, !!!sopi_descriptor))
+    bind_rows()
+
+  cat(paste0("Your query: ",
+             res[["request"]][["url"]],
+             "&key=",
+             res[["request"]][["headers"]][["Ocp-Apim-Subscription-Key"]],
+             "\n"))
 
   if(nrow(dt) == 100000) warning("dataset may be truncated")
 
