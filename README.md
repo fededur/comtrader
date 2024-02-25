@@ -18,13 +18,13 @@ Contact Federico at <federico.duranovich@mpi.govt> for the authentication token.
 
 ## Prerequisites
 You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** to be able to connect to the API.<br/>
-For further information you can visit the [UN Comtrade Wiki](https://unstats.un.org/wiki/display/comtrade/UN+Comtrade+Wiki).
+For further information you can visit the [UN Comtrade site](https://uncomtrade.org).
 
 ## Components
 
 ### Shiny app
 - comtrader shiny app.
-  - **app** shiny app wrapper function.
+  - **ctdashboard** shiny app wrapper function.
 
 To launch the app run:
 
@@ -57,8 +57,9 @@ app()
 
 - Data: tibble containing data to support querying.
   - **omtcodes** contains NZHSC and SOPI codes and categories to assist in querying the data.
-  - **hscodeshiny** contains NZHSC and SOPI codes and categories to assist in querying by comtrader shiny app.
-  - **countryshiny** contains a named list of country codes to use in comtrader shiny app.
+  - **hscodes** contains HS and SOPI codes and categories to assist in querying by comtrader shiny app.
+  - **reportercodes** contains a named list of reporter country codes to use in comtrader shiny app.
+  - **partnercodes** contains a named list of patner country codes to use in comtrader shiny app.
  
 ## Arguments to use in comtrader functions: 
 

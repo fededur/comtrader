@@ -14,4 +14,4 @@
 #'   \item{SOPI_group_HS6}{SOPI group descriptions based on NZHSC Level 6 codes groups.}
 #' }
 #' @source NZHSC
-"omtcodes"
+omtcodes
