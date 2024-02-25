@@ -5,7 +5,7 @@
 \alias{hs_code}
 \title{NZHSC codes and SOPI descriptions for comtrader shiny app}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 3292 rows and 3 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 4938 rows and 3 columns.
 }
 \usage{
 hs_code
