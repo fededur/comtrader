@@ -35,7 +35,7 @@ ctdashboard <- function(...){
                                     downloadButton("download","Download Data", style='padding:5px 10px; font-size:120%; background-color:#a6c5f7; color:white; width:100%'))
   )
 # server logic ----
-  server = function(input, output, session) {
+  server <- function(input, output, session) {
 
     rv <- reactiveValues(key_input = NULL)
     # initial pop up
