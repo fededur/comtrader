@@ -162,11 +162,11 @@ ctdashboard <- function(...){
         pull(code) %>%
         unique()
 
-      # sopilevel_quoname <- rlang::quo_name(input$sopilevel)
-      #
-      # hscodes_named <- omtcodes %>%
-      #   select(NZHSCLevel6,{{sopilevel_quoname}}) %>%
-      #   deframe()
+      sopilevel_quoname <- rlang::quo_name(input$sopilevel)
+
+      hscodes_named <- omtcodes %>%
+        select(NZHSCLevel6,{{sopilevel_quoname}}) %>%
+        deframe()
 
       query <- ctApp(freqCode = input$frequency,
                            cmdCode = hs,
@@ -174,10 +174,12 @@ ctdashboard <- function(...){
                            reporterCode = input$country,
                            partnerCode = input$partner,
                            flowCode = input$flow,
-                           uncomtrade_key = rv$key_input
-      ) #%>%
-        #purrr::pluck("data")
-      #mutate("{sopilevel_quoname}" := dplyr::recode(cmdCode, !!!hscodes_named))
+                           uncomtrade_key = rv$key_input)
+
+      query[["data"]] <- if (nrow(query[["data"]]) != 0 & ncol(query[["data"]]) != 0) {
+        query[["data"]] %>%
+          mutate("{sopilevel_quoname}" := dplyr::recode(cmdCode, !!!hscodes_named))
+      } else {query[["data"]]}
 
       return(query)
     })
