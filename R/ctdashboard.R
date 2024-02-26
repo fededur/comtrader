@@ -11,7 +11,7 @@ ctdashboard <- function(...){
                                                                    tags$style(".main-header .logo {text-align:left}"))),
                       dashboardSidebar(
                         div(selectInput("sopilevel", "SOPI Level", choices = unique(hscodes$sopiLevel)),
-                            selectInput("sopifilter", "Sopi Filter", choices = NULL, multiple = TRUE, selected = "All SOPI categories"),
+                            selectInput("sopifilter", "Sopi Filter", choices = NULL, multiple = TRUE, selected = "All categories"),
                             selectInput("flow", "Trade flow", choices = list("Exports" = "X", "Re-exports" = "RX", "Imports" = "M", "Re-imports" = "RM"), multiple = TRUE),
                             selectInput("country", "Country", choices =  reportercodes, multiple = TRUE),
                             selectInput("partner", "Trade partner", choices =  partnercodes, multiple = TRUE),
