@@ -21,18 +21,28 @@ ctdashboard <- function(...){
                         hr(),
                         uiOutput("keySide"),
                         div(actionButton("sq", "Submit Query", style='background-color:#007bb8; color:white; text-align:center; width:100%'), style = 'width:200px; align:center')),
-                      dashboardBody("Your query:",  verbatimTextOutput("dataInfo"),
-                                    box(
-                                      div(tableOutput("qt"), style = 'height:500px; width:100%; overflow-y:visible; overflow-x:auto;'),
+                      dashboardBody(
+                        tags$head(
+                          tags$style(
+                            HTML(".textoutput-container {white-space:pre-wrap; max-height:100%; overflow-x:auto; overflow-y:auto; text-overflow: ellipsis;}"))
+                          ),
+                        tabsetPanel(
+                          tabPanel("Data",
+                                   br(),
+                                   box(
+                                     div(tableOutput("qt"), style = 'height:500px; width:100%; overflow-y:visible; overflow-x:auto; padding:10px 10px'),
                                       width = 12,
                                       tags$style(HTML("
                                         #qt td, #qt th {
-                                        white-space: nowrap; /* Prevent text wrapping */
-                                        overflow: hidden; /* Hide overflowing content */
-                                        text-overflow: ellipsis; /* Display ellipsis for overflowed text */
-                                        max-width: 150px; /* Adjust the maximum width as needed */
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        max-width: 150px;
                                         }"))),
-                                    downloadButton("download","Download Data", style='padding:5px 10px; font-size:120%; background-color:#a6c5f7; color:white; width:100%'))
+                                    downloadButton("download","Download", style='padding:5px 10px; font-size:120%; background-color:#a6c5f7; color:white; width:100%')),
+                        tabPanel("Response",
+                                 div(class = "textoutput-container",textOutput("message"))
+                        )))
   )
 # server logic ----
   server <- function(input, output, session) {
@@ -71,7 +81,12 @@ ctdashboard <- function(...){
       } else {
         conditionalPanel(
           condition = "is.null(rv$key_input)",
-          div(actionButton("keySide", "Set API key", style='background-color:#007bb8; color:white; text-align:center; width:100%'), style = 'width:200px; align:center')
+          div(actionButton("keySide", "Set API key",
+                           style='background-color:#007bb8;
+                                  color:white;
+                                  text-align:center;
+                                  width:100%'),
+              style = 'width:200px; align:center')
         )
       }
     })
@@ -147,13 +162,13 @@ ctdashboard <- function(...){
         pull(code) %>%
         unique()
 
-      sopilevel_quoname <- rlang::quo_name(input$sopilevel)
+      # sopilevel_quoname <- rlang::quo_name(input$sopilevel)
+      #
+      # hscodes_named <- omtcodes %>%
+      #   select(NZHSCLevel6,{{sopilevel_quoname}}) %>%
+      #   deframe()
 
-      hscodes_named <- omtcodes %>%
-        select(NZHSCLevel6,{{sopilevel_quoname}}) %>%
-        deframe()
-
-      query_table <- ctApp(freqCode = input$frequency,
+      query <- ctApp(freqCode = input$frequency,
                            cmdCode = hs,
                            period = period_input(),
                            reporterCode = input$country,
@@ -161,21 +176,29 @@ ctdashboard <- function(...){
                            flowCode = input$flow,
                            uncomtrade_key = rv$key_input
       ) #%>%
+        #purrr::pluck("data")
       #mutate("{sopilevel_quoname}" := dplyr::recode(cmdCode, !!!hscodes_named))
 
-      return(query_table)
+      return(query)
     })
 
+
     output$qt <- renderTable({
-      query_result()})
+      query_result() %>%
+        purrr::pluck("data")
+    })
 
     output$download <- downloadHandler(
       filename = function(){
         "data.csv"
       },
       content = function(file){
-        write.csv(query_result(), file, row.names = FALSE)
+        write.csv(query_result()%>%
+                    purrr::pluck("data"), file, row.names = FALSE)
       })
+
+    output$message <- renderText({{query_result()%>%
+        purrr::pluck("message")}})
   }
 
 # Run app ----

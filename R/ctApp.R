@@ -72,15 +72,19 @@ ctApp <- function(
     purrr::pluck("data") %>%
     bind_rows()
 
-  cat(paste0("Your query: ",
-             res[["request"]][["url"]],
-             "&key=",
-             res[["request"]][["headers"]][["Ocp-Apim-Subscription-Key"]],
-             "\n"))
+  msg <- paste(
+    paste0("Your query: ", res[["request"]][["url"]],"&key=", res[["request"]][["headers"]][["Ocp-Apim-Subscription-Key"]]),
+    paste0("Status code: ",res[["status_code"]]),
+    paste0("Response: ",dplyr::case_when(
+      nrow(dt) == 1e+05 ~ "dataset may be truncated",
+      (ncol(dt) == 0 & nrow(dt) == 0 & res[["status_code"]] == 200) ~ "your query yield no result",
+      TRUE ~ "")),
+    sep="\n")
 
-  if(nrow(dt) == 100000) warning("dataset may be truncated")
+  qr <- list(
+    data = dt,
+    message = msg
+  )
 
-  if(nrow(dt) == 0) cat("Your query yielded no result\n")
-
-  return(dt)
+  return(qr)
 }
