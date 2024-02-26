@@ -1,6 +1,7 @@
 #' NZHSC codes and SOPI descriptions for comtrader shiny app
 #'
 #' @import dplyr
+#' @importFrom tidyr pivot_longer
 #' @export
 hs_code <- read.csv("data/SOPI_Group_HS6_level.csv", check.names = F, stringsAsFactors = F) %>%
   mutate(NZHSCLevel4 = sprintf("%04d", NZHSCLevel4),
