@@ -2,20 +2,20 @@
 #'
 #' @description Query datasets available in the UN Comtrade API
 #' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
-#' @param typeCode Type of trade: C for commodities and S for service
-#' @param freqCode Trade frequency: A for annual and M for monthly
-#' @param clCode Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.
-#' @param reporterCode Reporter code (Possible values are M49 code of the countries separated by comma (,))
-#' @param period Year or month. Year should be 4 digit year. Month should be six digit integer with the values of the form YYYYMM. Ex: 201002 for 2010 February. Multi value input should be in the form of csv (Codes separated by comma (,))
-#' @param publishedDateFrom Publication date From YYYY-MM-DD
-#' @param publishedDateTo Publication date To YYYY-MM-DD
+#' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
+#' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
+#' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
+#' @param reporterCode a character string indicating reporter code (Possible values are M49 code of the countries)
+#' @param period a character string indicating period. Year ("YYYY") or yearmonth ("YYYYMM"). Use character vector for multiple periods (defaults to all)
+#' @param publishedDateFrom a character string indicating the start publication date ("YYYY-MM-DD")
+#' @param publishedDateTo a character string indicating the end publication date ("YYYY-MM-DD")
 #' @return a tibble
 #'
 #' @export
 #' @import httr dplyr
 #' @importFrom magrittr %>%
 #' @examples
-#' getDagetDa(clCode = "H6",publishedDateFrom = "2020-01-01")
+#' getDagetDa(clCode = "H6", publishedDateFrom = "2020-01-01")
 getDa <- function(
     typeCode = "C",
     freqCode = "M",

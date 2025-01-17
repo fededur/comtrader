@@ -4,23 +4,23 @@
 \alias{cCheck}
 \title{Identify conflicts between two categories in a table}
 \usage{
-cCheck(.data = comtrader::omtcodes, ref1, ref2)
+cCheck(.data = omtcodes, ref1, ref2)
 }
 \arguments{
-\item{.data}{a table to read data from. Defaults to `omtcodes`.}
+\item{.data}{a dataframe to read data from. Defaults to `omtcodes`}
 
-\item{ref1}{first reference column.}
+\item{ref1}{first reference column}
 
-\item{ref2}{second reference column.}
+\item{ref2}{second reference column}
 }
 \value{
-a tibble.
+a tibble
 }
 \description{
-Creates a table of counts of matching categories between two columns of a table.
+Creates a table of counts of matching categories between two columns of a table
 }
 \details{
-the table is built with reference to the `ref1` argument.
+the table is built with reference to `ref1`
 }
 \examples{
 cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)

@@ -1,8 +1,8 @@
 #' Get live update data from UN Comtrade Database API
 #'
-#' @description Query progress on data release in the UN Comtrade API.
-#' @details further details on API features available at: `https://comtradedeveloper.un.org`.
-#' @return a tibble.
+#' @description Query progress on data release in the UN Comtrade API
+#' @details further details on API features available at: `https://comtradedeveloper.un.org`
+#' @return a tibble
 #'
 #' @export
 #' @import httr dplyr

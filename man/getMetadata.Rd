@@ -2,22 +2,22 @@
 % Please edit documentation in R/getMetadata.R
 \name{getMetadata}
 \alias{getMetadata}
-\title{Get meta data from UN Comtrade Database API}
+\title{Get metadata from UN Comtrade Database API}
 \usage{
 getMetadata(typeCode = "C", freqCode = "M", clCode = "HS")
 }
 \arguments{
-\item{typeCode}{Type of trade: C for commodities and S for service.}
+\item{typeCode}{a character string indicating type of trade: "C" for commodities and "S" for service}
 
-\item{freqCode}{Trade frequency: A for annual and M for monthly.}
+\item{freqCode}{a character string indicating trade frequency: "A" for annual and "M" for monthly}
 
-\item{clCode}{Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.}
+\item{clCode}{a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"}
 }
 \value{
 a tibble.
 }
 \description{
-Query meta data in the UN Comtrade API.
+Query meta data from the UN Comtrade API
 }
 \details{
 further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.

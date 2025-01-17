@@ -2,7 +2,7 @@
 % Please edit documentation in R/ctApp.R
 \name{ctApp}
 \alias{ctApp}
-\title{Custom get data from UN Comtrade Database API used in comtrader::app}
+\title{Custom get data from UN Comtrade Database API used by `comtrader::app`}
 \usage{
 ctApp(
   freqCode = "M",
@@ -21,44 +21,38 @@ ctApp(
 )
 }
 \arguments{
-\item{freqCode}{Trade frequency: A for annual and M for monthly.}
+\item{freqCode}{a character string indicating trade frequency: "A" for annual and "M" for monthly}
 
-\item{reporterCode}{Reporter code (Possible values are M49 code of the countries).}
+\item{reporterCode}{a character string indicating reporter code (M49 International Country Classification)}
 
-\item{partnerCode}{Partner code (Possible values are M49 code of the countries).}
+\item{period}{a character string indicating period. Year ("YYYY") or yearmonth ("YYYYMM"). Use character vector for multiple periods (defaults to all)}
 
-\item{partner2Code}{Second partner/consignment code (Possible values are M49 code of the countries).}
+\item{partnerCode}{Partner code (M49 International Country Classification)}
 
-\item{flowCode}{Trade flow code. Multi value input should be in the form of a character vector).}
+\item{partner2Code}{Second partner/consignment code (M49 International Country Classification)}
 
-\item{customsCode}{Customs code. Multi value input should be in the form of a character vector).}
+\item{cmdCode}{a character string indicating HS commodity code. Use character vector for multiple commodity code entries (defaults to all)}
 
-\item{motCode}{Mode of transport code. Multi value input should be in the form of a character vector).}
+\item{flowCode}{a character string indicating trade flow code:  "X" for exports, "RX" for re-exports, "M" for imports, "RM" for re-imports. Use character vector for multiple trade flow entries}
 
-\item{aggregateBy}{Add parameters in the form of a character vector on which you want the results to be aggregated.}
+\item{customsCode}{a character string indicating customs code. Use character vector for multiple customs code entries (defaults to all)}
 
-\item{breakdownMode}{Mode to choose from.}
+\item{motCode}{a character string indicating mode of transport code. Use character vector for multiple transport code entries(defaults to all)}
 
-\item{includeDesc}{Include descriptions of data variables.}
+\item{aggregateBy}{Add parameters in the form of a character vector on which you want the results to be aggregated}
 
-\item{uncomtrade_key}{UN Comtrade API key.}
+\item{breakdownMode}{a character string indicating breakdown mode: "classic" (trade by partner/product: dafault) or "plus" (extended breakdown)}
 
-\item{clCode}{Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.}
+\item{includeDesc}{boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)}
 
-\item{startDate}{Optional start date for query (e.g. "2020-01-01"). Multi value input should be in the form of a character vector.}
-
-\item{endDate}{Optional end date for query (e.g. "2022-01-01").}
-
-\item{sopiLevel}{SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`).}
-
-\item{sopiFilter}{character string to filter SOPI level (e.g.: "Dairy").}
+\item{uncomtrade_key}{a character string indicating UN Comtrade API key}
 }
 \value{
 a tibble
 }
 \description{
-Custom get function to query data from the UN Comtrade API used in comtrader::app.
+Custom get function to query data from the UN Comtrade API used by `comtrader::app`
 }
 \examples{
-ctApp(freqCode = "M", reporterCode = 36, startDate = "2020-01-01", endDate = "2020-02-01", sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy", uncomtrade_key = "")
+ctApp(freqCode = "M", reporterCode = 36, period = "202001", uncomtrade_key = "")
 }

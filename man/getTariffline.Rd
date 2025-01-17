@@ -20,38 +20,38 @@ getTariffline(
 )
 }
 \arguments{
-\item{typeCode}{Type of trade: C for commodities and S for service.}
+\item{typeCode}{a character string indicating type of trade: "C" for commodities and "S" for service}
 
-\item{freqCode}{Trade frequency: A for annual and M for monthly.}
+\item{freqCode}{a character string indicating trade frequency: "A" for annual and "M" for monthly}
 
-\item{clCode}{Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.}
+\item{clCode}{a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"}
 
-\item{reporterCode}{Reporter code (Possible values are M49 code of the countries separated by comma (,)).}
+\item{reporterCode}{a character string indicating reporter code (Possible values are M49 code of the countries)}
 
-\item{period}{Year or month. Year should be 4 digit year. Month should be six digit integer with the values of the form YYYYMM. Ex: 201002 for 2010 February. Multi value input should be in the form of csv (Codes separated by comma (,)).}
+\item{period}{a character string indicating period. Year ("YYYY") or yearmonth ("YYYYMM"). Use character vector for multiple periods (defaults to all)}
 
-\item{partnerCode}{Partner code (Possible values are M49 code of the countries separated by comma (,)).}
+\item{partnerCode}{Partner code (M49 International Country Classification)}
 
-\item{partner2Code}{Second partner/consignment code (Possible values are M49 code of the countries separated by comma (,)).}
+\item{partner2Code}{Second partner/consignment code (M49 International Country Classification)}
 
-\item{cmdCode}{Commodity code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
+\item{cmdCode}{a character string indicating HS commodity code. Use character vector for multiple commodity code entries (defaults to all)}
 
-\item{flowCode}{Trade flow code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
+\item{flowCode}{a character string indicating trade flow code:  "X" for exports, "RX" for re-exports, "M" for imports, "RM" for re-imports. Use character vector for multiple trade flow entries}
 
-\item{customsCode}{Customs code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
+\item{customsCode}{a character string indicating customs code. Use character vector for multiple customs code entries (defaults to all)}
 
-\item{motCode}{Mode of transport code. Multi value input should be in the form of csv (Codes separated by comma (,)).}
+\item{motCode}{a character string indicating mode of transport code. Use character vector for multiple customs code entries transport code (defaults to all)}
 
-\item{includeDesc}{Include descriptions of data variables.}
+\item{includeDesc}{boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)}
 }
 \value{
-a tibble.
+a tibble
 }
 \description{
-Query tariff line data in the UN Comtrade API.
+Query tariff line data in the UN Comtrade API
 }
 \details{
-further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
+further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
 }
 \examples{
 getTariffline(period = "202201")

@@ -1,24 +1,23 @@
 #' Create named vector for HS codes
 #'
-#' @description Creates a named vector matching HS codes and SOPI Categories
-#' @details Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification.
+#' @description Creates a named character vector of matching HS codes and SOPI Categories
+#' @details Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification
 #' @param hsLevel NZHSC level code (either NZHSCLevel2, NZHSCLevel4 or NZHSCLevel6)
 #' @param sopiLevel SOPI category level (either `Primary Industry Sector` or `SOPI_group_HS6`)
+#' @param sopiFilter a character vector indicating SOPI category level to filter
 #' @param query If `TRUE` returns a vector of commodity codes (`cmdCode`) to use in a query. If `FALSE` returns a vector of `sopiLevel` names associated with the commodity code.
-#'
-#' @return a named vector
-#'
+#' @return a named character vector
 #' @import dplyr tibble
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' commodityRecode(hsLevel = NZHSCLevel6, sopiLevel= `SOPI_group_HS6`)
+#' commodityRecode(hsLevel = NZHSCLevel6, sopiLevel= `Primary Industry Sector`, sopiFilter = "Dairy")
 commodityRecode <-  function(hsLevel = NZHSCLevel6,
                              sopiLevel = `SOPI_group_HS6`,
                              sopiFilter = NULL,
                              query = TRUE) {
 
-  comtrader::omtcodes %>%
+  omtcodes %>%
     tibble::as_tibble() %>%
     select({{sopiLevel}},{{hsLevel}}) %>%
     {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel}}, ~ . %in% {{sopiFilter}})) else .} %>%

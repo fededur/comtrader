@@ -4,7 +4,7 @@
 \alias{ctdashboard}
 \title{UN Comtrade shiny app}
 \usage{
-ctdashboard(...)
+ctdashboard()
 }
 \description{
 run shiny app to query data from the UN Comtrade API.

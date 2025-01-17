@@ -1,21 +1,21 @@
 #' Get tariff line data from UN Comtrade Database API
 #'
-#' @description Query tariff line data in the UN Comtrade API.
-#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
-#' @param typeCode Type of trade: C for commodities and S for service.
-#' @param freqCode Trade frequency: A for annual and M for monthly.
-#' @param clCode Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.
-#' @param reporterCode Reporter code (Possible values are M49 code of the countries separated by comma (,)).
-#' @param period Year or month. Year should be 4 digit year. Month should be six digit integer with the values of the form YYYYMM. Ex: 201002 for 2010 February. Multi value input should be in the form of csv (Codes separated by comma (,)).
-#' @param partnerCode Partner code (Possible values are M49 code of the countries separated by comma (,)).
-#' @param partner2Code Second partner/consignment code (Possible values are M49 code of the countries separated by comma (,)).
-#' @param cmdCode Commodity code. Multi value input should be in the form of csv (Codes separated by comma (,)).
-#' @param flowCode Trade flow code. Multi value input should be in the form of csv (Codes separated by comma (,)).
-#' @param customsCode Customs code. Multi value input should be in the form of csv (Codes separated by comma (,)).
-#' @param motCode Mode of transport code. Multi value input should be in the form of csv (Codes separated by comma (,)).
-#' @param includeDesc Include descriptions of data variables.
+#' @description Query tariff line data in the UN Comtrade API
+#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
+#' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
+#' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
+#' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
+#' @param reporterCode a character string indicating reporter code (Possible values are M49 code of the countries)
+#' @param period a character string indicating period. Year ("YYYY") or yearmonth ("YYYYMM"). Use character vector for multiple periods (defaults to all)
+#' @param partnerCode Partner code (M49 International Country Classification)
+#' @param partner2Code Second partner/consignment code (M49 International Country Classification)
+#' @param cmdCode a character string indicating HS commodity code. Use character vector for multiple commodity code entries (defaults to all)
+#' @param flowCode a character string indicating trade flow code:  "X" for exports, "RX" for re-exports, "M" for imports, "RM" for re-imports. Use character vector for multiple trade flow entries
+#' @param customsCode a character string indicating customs code. Use character vector for multiple customs code entries (defaults to all)
+#' @param motCode a character string indicating mode of transport code. Use character vector for multiple customs code entries transport code (defaults to all)
+#' @param includeDesc boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)
 #'
-#' @return a tibble.
+#' @return a tibble
 #'
 #' @export
 #' @import httr dplyr

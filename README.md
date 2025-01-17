@@ -30,7 +30,7 @@ To launch the app run:
 
 ``` r
 library(comtrader)
-app()
+ctdashboard()
 ```
 
 ### Functions

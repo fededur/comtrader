@@ -1,11 +1,10 @@
-#' Get meta data from UN Comtrade Database API
+#' Get metadata from UN Comtrade Database API
 #'
-#' @description Query meta data in the UN Comtrade API.
+#' @description Query meta data from the UN Comtrade API
 #' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
-#' @param typeCode Type of trade: C for commodities and S for service.
-#' @param freqCode Trade frequency: A for annual and M for monthly.
-#' @param clCode Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.
-#'
+#' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
+#' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
+#' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
 #' @return a tibble.
 #'
 #' @export

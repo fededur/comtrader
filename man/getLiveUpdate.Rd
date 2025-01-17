@@ -7,13 +7,13 @@
 getLiveUpdate()
 }
 \value{
-a tibble.
+a tibble
 }
 \description{
-Query progress on data release in the UN Comtrade API.
+Query progress on data release in the UN Comtrade API
 }
 \details{
-further details on API features available at: `https://comtradedeveloper.un.org`.
+further details on API features available at: `https://comtradedeveloper.un.org`
 }
 \examples{
 getLiveUpdate()

@@ -1,22 +1,19 @@
-#' Custom get data from UN Comtrade Database API used in comtrader::app
+#' Custom get data from UN Comtrade Database API used by `comtrader::app`
 #'
-#' @description Custom get function to query data from the UN Comtrade API used in comtrader::app.
-#' @param freqCode Trade frequency: A for annual and M for monthly.
-#' @param clCode Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.
-#' @param reporterCode Reporter code (Possible values are M49 code of the countries).
-#' @param startDate Optional start date for query (e.g. "2020-01-01"). Multi value input should be in the form of a character vector.
-#' @param endDate Optional end date for query (e.g. "2022-01-01").
-#' @param partnerCode Partner code (Possible values are M49 code of the countries).
-#' @param partner2Code Second partner/consignment code (Possible values are M49 code of the countries).
-#' @param flowCode Trade flow code. Multi value input should be in the form of a character vector).
-#' @param customsCode Customs code. Multi value input should be in the form of a character vector).
-#' @param motCode Mode of transport code. Multi value input should be in the form of a character vector).
-#' @param aggregateBy Add parameters in the form of a character vector on which you want the results to be aggregated.
-#' @param breakdownMode Mode to choose from.
-#' @param includeDesc Include descriptions of data variables.
-#' @param sopiLevel SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`).
-#' @param sopiFilter character string to filter SOPI level (e.g.: "Dairy").
-#' @param uncomtrade_key UN Comtrade API key.
+#' @description Custom get function to query data from the UN Comtrade API used by `comtrader::app`
+#' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
+#' @param reporterCode a character string indicating reporter code (M49 International Country Classification)
+#' @param period a character string indicating period. Year ("YYYY") or yearmonth ("YYYYMM"). Use character vector for multiple periods (defaults to all)
+#' @param partnerCode Partner code (M49 International Country Classification)
+#' @param partner2Code Second partner/consignment code (M49 International Country Classification)
+#' @param cmdCode a character string indicating HS commodity code. Use character vector for multiple commodity code entries (defaults to all)
+#' @param flowCode a character string indicating trade flow code:  "X" for exports, "RX" for re-exports, "M" for imports, "RM" for re-imports. Use character vector for multiple trade flow entries
+#' @param customsCode a character string indicating customs code. Use character vector for multiple customs code entries (defaults to all)
+#' @param motCode a character string indicating mode of transport code. Use character vector for multiple transport code entries(defaults to all)
+#' @param aggregateBy Add parameters in the form of a character vector on which you want the results to be aggregated
+#' @param breakdownMode a character string indicating breakdown mode: "classic" (trade by partner/product: dafault) or "plus" (extended breakdown)
+#' @param includeDesc boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)
+#' @param uncomtrade_key a character string indicating UN Comtrade API key
 #' @return a tibble
 #'
 #' @import httr dplyr lubridate
@@ -24,7 +21,7 @@
 #' @importFrom purrr map_chr
 #' @export
 #' @examples
-#' ctApp(freqCode = "M", reporterCode = 36, startDate = "2020-01-01", endDate = "2020-02-01", sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy", uncomtrade_key = "")
+#' ctApp(freqCode = "M", reporterCode = 36, period = "202001", uncomtrade_key = "")
 ctApp <- function(
     freqCode = "M",
     reporterCode = NULL,

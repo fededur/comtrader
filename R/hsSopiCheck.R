@@ -1,12 +1,11 @@
 #' Identify conflicts between two categories in a table
 #'
-#' @description Creates a table of counts of matching categories between two columns of a table.
-#' @details the table is built with reference to the `ref1` argument.
-#' @param .data a table to read data from. Defaults to `omtcodes`.
-#' @param ref1 first reference column.
-#' @param ref2 second reference column.
-#'
-#' @return a tibble.
+#' @description Creates a table of counts of matching categories between two columns of a table
+#' @details the table is built with reference to `ref1`
+#' @param .data a dataframe to read data from. Defaults to `omtcodes`
+#' @param ref1 first reference column
+#' @param ref2 second reference column
+#' @return a tibble
 #'
 #' @import dplyr tibble
 #' @importFrom magrittr %>%
@@ -14,7 +13,7 @@
 #' @export
 #' @examples
 #' cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
-cCheck <- function(.data = comtrader::omtcodes, ref1, ref2){
+cCheck <- function(.data = omtcodes, ref1, ref2){
 
   ref1_quo <- enquo(ref1)
   ref2_quo <- enquo(ref2)

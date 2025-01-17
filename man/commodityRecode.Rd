@@ -16,17 +16,19 @@ commodityRecode(
 
 \item{sopiLevel}{SOPI category level (either `Primary Industry Sector` or `SOPI_group_HS6`)}
 
+\item{sopiFilter}{a character vector indicating SOPI category level to filter}
+
 \item{query}{If `TRUE` returns a vector of commodity codes (`cmdCode`) to use in a query. If `FALSE` returns a vector of `sopiLevel` names associated with the commodity code.}
 }
 \value{
-a named vector
+a named character vector
 }
 \description{
-Creates a named vector matching HS codes and SOPI Categories
+Creates a named character vector of matching HS codes and SOPI Categories
 }
 \details{
-Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification.
+Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification
 }
 \examples{
-commodityRecode(hsLevel = NZHSCLevel6, sopiLevel= `SOPI_group_HS6`)
+commodityRecode(hsLevel = NZHSCLevel6, sopiLevel= `Primary Industry Sector`, sopiFilter = "Dairy")
 }

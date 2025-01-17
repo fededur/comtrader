@@ -25,45 +25,45 @@ getCTSopi(
 )
 }
 \arguments{
-\item{typeCode}{Type of trade: C for commodities and S for service.}
+\item{typeCode}{a character string indicating type of trade: "C" for commodities and "S" for service}
 
-\item{freqCode}{Trade frequency: A for annual and M for monthly.}
+\item{freqCode}{a character string indicating trade frequency: "A" for annual and "M" for monthly}
 
-\item{clCode}{Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.}
+\item{clCode}{a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"}
 
-\item{reporterCode}{Reporter code (Possible values are M49 code of the countries).}
+\item{reporterCode}{a character string indicating reporter code (Possible values are M49 code of the countries)}
 
-\item{startDate}{Optional start date for query (e.g. "2020-01-01"). Multi value input should be in the form of a character vector.}
+\item{startDate}{a character string indicating start date for query: "YYYY-MM-DD" (optional).}
 
-\item{endDate}{Optional end date for query (e.g. "2022-01-01").}
+\item{endDate}{Optional end date for query: "YYYY-MM-DD" (optional).}
 
-\item{partnerCode}{Partner code (Possible values are M49 code of the countries).}
+\item{partnerCode}{Partner code (M49 International Country Classification).}
 
-\item{partner2Code}{Second partner/consignment code (Possible values are M49 code of the countries).}
+\item{partner2Code}{Second partner/consignment code (M49 International Country Classification).}
 
-\item{flowCode}{Trade flow code. Multi value input should be in the form of a character vector).}
+\item{flowCode}{a character string indicating trade flow code:  "X" for exports, "RX" for re-exports, "M" for imports, "RM" for re-imports. Use character vector for multiple trade flow entries}
 
-\item{customsCode}{Customs code. Multi value input should be in the form of a character vector).}
+\item{customsCode}{a character string indicating customs code. Use character vector for multiple customs code entries (defaults to all)}
 
-\item{motCode}{Mode of transport code. Multi value input should be in the form of a character vector).}
+\item{motCode}{a character string indicating mode of transport code. Use character vector for multiple customs code entries transport code (defaults to all)}
 
-\item{aggregateBy}{Add parameters in the form of a character vector on which you want the results to be aggregated.}
+\item{aggregateBy}{Add parameters in the form of a character vector on which you want the results to be aggregated}
 
-\item{breakdownMode}{Mode to choose from.}
+\item{breakdownMode}{a character string indicating breakdown mode: "classic" (trade by partner/product: dafault) or "plus" (extended breakdown)}
 
-\item{includeDesc}{Include descriptions of data variables.}
+\item{includeDesc}{boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)}
 
-\item{sopiLevel}{SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`).}
+\item{sopiLevel}{SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`)}
 
-\item{sopiFilter}{character string to filter SOPI level (e.g.: "Dairy").}
+\item{sopiFilter}{character string to filter SOPI level (e.g.: "Dairy")}
 
-\item{hs}{HS code level column in `omtcodes` (e.g.: `NZHSCLevel6`.}
+\item{hs}{HS code level column in `omtcodes` (e.g.: `NZHSCLevel6`)}
 }
 \value{
 a tibble
 }
 \description{
-Custom get function to query data from the UN Comtrade API.
+Custom get function to query data from the UN Comtrade API
 }
 \details{
 further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1&operation=get-get`

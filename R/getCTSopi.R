@@ -1,24 +1,24 @@
 #' Custom get data from UN Comtrade Database API
 #'
-#' @description Custom get function to query data from the UN Comtrade API.
+#' @description Custom get function to query data from the UN Comtrade API
 #' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1&operation=get-get`
-#' @param typeCode Type of trade: C for commodities and S for service.
-#' @param freqCode Trade frequency: A for annual and M for monthly.
-#' @param clCode Trade (IMTS) classifications: HS, SITC, BEC or EBOPS.
-#' @param reporterCode Reporter code (Possible values are M49 code of the countries).
-#' @param startDate Optional start date for query (e.g. "2020-01-01"). Multi value input should be in the form of a character vector.
-#' @param endDate Optional end date for query (e.g. "2022-01-01").
-#' @param partnerCode Partner code (Possible values are M49 code of the countries).
-#' @param partner2Code Second partner/consignment code (Possible values are M49 code of the countries).
-#' @param flowCode Trade flow code. Multi value input should be in the form of a character vector).
-#' @param customsCode Customs code. Multi value input should be in the form of a character vector).
-#' @param motCode Mode of transport code. Multi value input should be in the form of a character vector).
-#' @param aggregateBy Add parameters in the form of a character vector on which you want the results to be aggregated.
-#' @param breakdownMode Mode to choose from.
-#' @param includeDesc Include descriptions of data variables.
-#' @param sopiLevel SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`).
-#' @param sopiFilter character string to filter SOPI level (e.g.: "Dairy").
-#' @param hs HS code level column in `omtcodes` (e.g.: `NZHSCLevel6`.
+#' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
+#' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
+#' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
+#' @param reporterCode a character string indicating reporter code (Possible values are M49 code of the countries)
+#' @param startDate a character string indicating start date for query: "YYYY-MM-DD" (optional).
+#' @param endDate Optional end date for query: "YYYY-MM-DD" (optional).
+#' @param partnerCode Partner code (M49 International Country Classification).
+#' @param partner2Code Second partner/consignment code (M49 International Country Classification).
+#' @param flowCode a character string indicating trade flow code:  "X" for exports, "RX" for re-exports, "M" for imports, "RM" for re-imports. Use character vector for multiple trade flow entries
+#' @param customsCode a character string indicating customs code. Use character vector for multiple customs code entries (defaults to all)
+#' @param motCode a character string indicating mode of transport code. Use character vector for multiple customs code entries transport code (defaults to all)
+#' @param aggregateBy Add parameters in the form of a character vector on which you want the results to be aggregated
+#' @param breakdownMode a character string indicating breakdown mode: "classic" (trade by partner/product: dafault) or "plus" (extended breakdown)
+#' @param includeDesc boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)
+#' @param sopiLevel SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`)
+#' @param sopiFilter character string to filter SOPI level (e.g.: "Dairy")
+#' @param hs HS code level column in `omtcodes` (e.g.: `NZHSCLevel6`)
 #' @return a tibble
 #'
 #' @import httr dplyr lubridate
@@ -46,7 +46,7 @@ getCTSopi <- function(
     sopiFilter = NULL,
     hs = NZHSCLevel6){
 
-  if(is.null(comtrader::get_uncomtrade_key())){
+  if(is.null(get_uncomtrade_key())){
 
     stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
 
@@ -85,7 +85,7 @@ getCTSopi <- function(
       nullToChr()
   }
 
-  QueryCodes <- comtrader::omtcodes %>%
+  QueryCodes <- omtcodes %>%
     tibble::as_tibble() %>%
     select({{sopiLevel_quo}},{{hs_quo}}) %>%
     {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel_quo}}, ~ . %in% {{sopiFilter}})) else .} %>%

@@ -1,10 +1,10 @@
 #' UN Comtrade shiny app
 #'
 #' @description run shiny app to query data from the UN Comtrade API.
-#' @import shiny shinydashboard shinyWidgets dplyr
+#' @import shiny shinydashboard shinyWidgets dplyr purrr
 #' @importFrom magrittr %>%
 #' @export
-ctdashboard <- function(...){
+ctdashboard <- function(){
 # ui logic ----
   ui <- dashboardPage(skin = "purple",
                       dashboardHeader(title = "comtrader", tags$li(class = "dropdown",
@@ -42,7 +42,10 @@ ctdashboard <- function(...){
                                     downloadButton("download","Download", style='padding:5px 10px; font-size:120%; background-color:#a6c5f7; color:white; width:100%')),
                         tabPanel("Response",
                                  div(class = "textoutput-container",textOutput("message"))
-                        )))
+                                 )
+                        )
+                      )
+
   )
 # server logic ----
   server <- function(input, output, session) {
@@ -169,12 +172,12 @@ ctdashboard <- function(...){
         deframe()
 
       query <- ctApp(freqCode = input$frequency,
-                           cmdCode = hs,
-                           period = period_input(),
-                           reporterCode = input$country,
-                           partnerCode = input$partner,
-                           flowCode = input$flow,
-                           uncomtrade_key = rv$key_input)
+                     cmdCode = hs,
+                     period = period_input(),
+                     reporterCode = input$country,
+                     partnerCode = input$partner,
+                     flowCode = input$flow,
+                     uncomtrade_key = rv$key_input)
 
       query[["data"]] <- if (nrow(query[["data"]]) != 0 & ncol(query[["data"]]) != 0) {
         query[["data"]] %>%
