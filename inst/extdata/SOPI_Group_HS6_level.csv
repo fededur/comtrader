@@ -1,4 +1,4 @@
-Primary Industry Sector,SOPI_group _HS6,NZHSCLevel4,NZHSCLevel4Desc,NZHSCLevel6,NZHSCLevel6Desc,HS6 text
+Primary_Industry_Sector,SOPI_group_HS6,NZHSCLevel4,NZHSCLevel4Desc,NZHSCLevel6,NZHSCLevel6Desc,HS6_text
 Arable,Cereals and Cereal Products,1001,Wheat and meslin,100110,Cereals; durum wheat,100110
 Arable,Cereals and Cereal Products,1001,Wheat and meslin,100111,"Cereals; wheat and meslin, durum wheat, seed",100111
 Arable,Cereals and Cereal Products,1001,Wheat and meslin,100119,"Cereals; wheat and meslin, durum wheat, other than seed",100119

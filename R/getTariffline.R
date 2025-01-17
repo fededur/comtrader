@@ -1,7 +1,7 @@
 #' Get tariff line data from UN Comtrade Database API
 #'
 #' @description Query tariff line data in the UN Comtrade API
-#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
+#' @details for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 #' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
 #' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
 #' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
@@ -14,12 +14,12 @@
 #' @param customsCode a character string indicating customs code. Use character vector for multiple customs code entries (defaults to all)
 #' @param motCode a character string indicating mode of transport code. Use character vector for multiple customs code entries transport code (defaults to all)
 #' @param includeDesc boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)
-#'
 #' @return a tibble
 #'
 #' @export
 #' @import httr dplyr
 #' @importFrom magrittr %>%
+#' @importFrom purrr pluck
 #' @examples
 #' getTariffline(period = "202201")
 getTariffline <- function(
@@ -36,9 +36,10 @@ getTariffline <- function(
     motCode = NULL,
     includeDesc = TRUE){
 
-  if(is.null(comtrader::get_uncomtrade_key())){
+  if(is.null(get_uncomtrade_key())){
 
-    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+    warning("API key is not set. Please use set_uncomtrade_key() to set your API key to access the data.")
+    return(NULL)
 
   }
 

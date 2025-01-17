@@ -2,23 +2,23 @@
 #'
 #' @description Creates a table of counts of matching categories between two columns of a table
 #' @details the table is built with reference to `ref1`
-#' @param .data a dataframe to read data from. Defaults to `omtcodes`
+#' @param x a data frame
 #' @param ref1 first reference column
 #' @param ref2 second reference column
 #' @return a tibble
 #'
-#' @import dplyr tibble
+#' @import dplyr tibble rlang
 #' @importFrom magrittr %>%
 #' @importFrom tidyr pivot_wider
 #' @export
 #' @examples
-#' cCheck(ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
-cCheck <- function(.data = omtcodes, ref1, ref2){
+#' cCheck(x = comtrader::omtcodes, ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
+cCheck <- function(x = comtrader::omtcodes, ref1, ref2){
 
-  ref1_quo <- enquo(ref1)
-  ref2_quo <- enquo(ref2)
+  ref1_quo <- rlang::enquo(ref1)
+  ref2_quo <- rlang::enquo(ref2)
 
-  {{.data}} %>%
+  x %>%
     as_tibble() %>%
     select({{ref1_quo}},{{ref2_quo}}) %>%
     tidyr::pivot_wider(values_from = {{ref2_quo}},

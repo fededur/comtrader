@@ -51,8 +51,5 @@ ctApp(
 a tibble
 }
 \description{
-Custom get function to query data from the UN Comtrade API used by `comtrader::app`
-}
-\examples{
-ctApp(freqCode = "M", reporterCode = 36, period = "202001", uncomtrade_key = "")
+Custom get function to query data from the [UN Comtrade API](`https://comtradedeveloper.un.org`) used by `comtrader::ctdashboard` Shiny app
 }

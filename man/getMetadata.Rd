@@ -20,7 +20,7 @@ a tibble.
 Query meta data from the UN Comtrade API
 }
 \details{
-further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
+for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 }
 \examples{
 getMetadata(clCode = "H6")

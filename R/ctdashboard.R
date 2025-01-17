@@ -1,11 +1,12 @@
 #' UN Comtrade shiny app
 #'
 #' @description run shiny app to query data from the UN Comtrade API.
-#' @import shiny shinydashboard shinyWidgets dplyr purrr
+#' @import shiny shinydashboard shinyWidgets dplyr purrr rlang
 #' @importFrom magrittr %>%
+#' @importFrom utils write.csv
 #' @export
 ctdashboard <- function(){
-# ui logic ----
+# ui ----
   ui <- dashboardPage(skin = "purple",
                       dashboardHeader(title = "comtrader", tags$li(class = "dropdown",
                                                                    tags$style(".main-header .logo {text-align:left}"))),
@@ -47,7 +48,7 @@ ctdashboard <- function(){
                       )
 
   )
-# server logic ----
+# server ----
   server <- function(input, output, session) {
 
     rv <- reactiveValues(key_input = NULL)

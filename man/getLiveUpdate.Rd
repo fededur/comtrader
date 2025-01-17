@@ -13,7 +13,7 @@ a tibble
 Query progress on data release in the UN Comtrade API
 }
 \details{
-further details on API features available at: `https://comtradedeveloper.un.org`
+for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 }
 \examples{
 getLiveUpdate()

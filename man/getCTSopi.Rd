@@ -19,7 +19,7 @@ getCTSopi(
   aggregateBy = NULL,
   breakdownMode = "classic",
   includeDesc = TRUE,
-  sopiLevel = `Primary Industry Sector`,
+  sopiLevel = Primary_Industry_Sector,
   sopiFilter = NULL,
   hs = NZHSCLevel6
 )
@@ -53,7 +53,7 @@ getCTSopi(
 
 \item{includeDesc}{boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)}
 
-\item{sopiLevel}{SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`)}
+\item{sopiLevel}{SOPI level column in `omtcodes` (either `Primary_Industry_Sector` or `SOPI_group_HS6`)}
 
 \item{sopiFilter}{character string to filter SOPI level (e.g.: "Dairy")}
 
@@ -66,8 +66,12 @@ a tibble
 Custom get function to query data from the UN Comtrade API
 }
 \details{
-further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1&operation=get-get`
+for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 }
 \examples{
-getCTSopi(freqCode = "M", reporterCode = 36, startDate = "2020-01-01", endDate = "2020-02-01", sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy")
+getCTSopi(reporterCode = 36,
+          startDate = "2020-01-01",
+          endDate = "2020-02-01",
+          sopiLevel = Primary_Industry_Sector,
+          sopiFilter = "Dairy")
 }

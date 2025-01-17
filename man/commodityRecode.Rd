@@ -14,7 +14,7 @@ commodityRecode(
 \arguments{
 \item{hsLevel}{NZHSC level code (either NZHSCLevel2, NZHSCLevel4 or NZHSCLevel6)}
 
-\item{sopiLevel}{SOPI category level (either `Primary Industry Sector` or `SOPI_group_HS6`)}
+\item{sopiLevel}{SOPI category level (either `Primary_Industry_Sector` or `SOPI_group_HS6`)}
 
 \item{sopiFilter}{a character vector indicating SOPI category level to filter}
 
@@ -30,5 +30,5 @@ Creates a named character vector of matching HS codes and SOPI Categories
 Data was extracted from the Power BI OMT dataset. This dataset needs to be updated if there are changes in the OMT classification
 }
 \examples{
-commodityRecode(hsLevel = NZHSCLevel6, sopiLevel= `Primary Industry Sector`, sopiFilter = "Dairy")
+commodityRecode(hsLevel = NZHSCLevel6, sopiLevel = Primary_Industry_Sector, sopiFilter = "Dairy")
 }

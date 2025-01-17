@@ -1,7 +1,7 @@
 #' Custom get data from UN Comtrade Database API
 #'
 #' @description Custom get function to query data from the UN Comtrade API
-#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1&operation=get-get`
+#' @details for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 #' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
 #' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
 #' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
@@ -16,17 +16,21 @@
 #' @param aggregateBy Add parameters in the form of a character vector on which you want the results to be aggregated
 #' @param breakdownMode a character string indicating breakdown mode: "classic" (trade by partner/product: dafault) or "plus" (extended breakdown)
 #' @param includeDesc boolean indicating if categories descriptions shoould be returned (defaults to `TRUE`)
-#' @param sopiLevel SOPI level column in `omtcodes` (either `Primary Industry Sector` or `SOPI_group_HS6`)
+#' @param sopiLevel SOPI level column in `omtcodes` (either `Primary_Industry_Sector` or `SOPI_group_HS6`)
 #' @param sopiFilter character string to filter SOPI level (e.g.: "Dairy")
 #' @param hs HS code level column in `omtcodes` (e.g.: `NZHSCLevel6`)
 #' @return a tibble
 #'
-#' @import httr dplyr lubridate
+#' @import httr dplyr lubridate rlang
 #' @importFrom magrittr %>%
 #' @importFrom purrr map_chr
 #' @export
 #' @examples
-#' getCTSopi(freqCode = "M", reporterCode = 36, startDate = "2020-01-01", endDate = "2020-02-01", sopiLevel = `Primary Industry Sector`, sopiFilter = "Dairy")
+#' getCTSopi(reporterCode = 36,
+#'           startDate = "2020-01-01",
+#'           endDate = "2020-02-01",
+#'           sopiLevel = Primary_Industry_Sector,
+#'           sopiFilter = "Dairy")
 getCTSopi <- function(
     typeCode = "C",
     freqCode = "M",
@@ -42,13 +46,14 @@ getCTSopi <- function(
     aggregateBy = NULL,
     breakdownMode = "classic",
     includeDesc = TRUE,
-    sopiLevel = `Primary Industry Sector`,
+    sopiLevel = Primary_Industry_Sector,
     sopiFilter = NULL,
     hs = NZHSCLevel6){
 
   if(is.null(get_uncomtrade_key())){
 
-    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+    warning("API key is not set. Please use set_uncomtrade_key() to set your API key to access the data.")
+    return(NULL)
 
   }
 
@@ -85,7 +90,7 @@ getCTSopi <- function(
       nullToChr()
   }
 
-  QueryCodes <- omtcodes %>%
+  QueryCodes <- comtrader::omtcodes %>%
     tibble::as_tibble() %>%
     select({{sopiLevel_quo}},{{hs_quo}}) %>%
     {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel_quo}}, ~ . %in% {{sopiFilter}})) else .} %>%

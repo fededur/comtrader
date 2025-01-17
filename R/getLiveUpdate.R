@@ -1,19 +1,21 @@
 #' Get live update data from UN Comtrade Database API
 #'
 #' @description Query progress on data release in the UN Comtrade API
-#' @details further details on API features available at: `https://comtradedeveloper.un.org`
+#' @details for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 #' @return a tibble
 #'
 #' @export
 #' @import httr dplyr
 #' @importFrom magrittr %>%
+#' @importFrom purrr pluck
 #' @examples
 #' getLiveUpdate()
 getLiveUpdate <- function(){
 
-  if(is.null(comtrader::get_uncomtrade_key())){
+  if(is.null(get_uncomtrade_key())){
 
-    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+    warning("API key is not set. Please use set_uncomtrade_key() to set your API key to access the data.")
+    return(NULL)
 
   }
 

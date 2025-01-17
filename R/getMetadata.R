@@ -1,7 +1,7 @@
 #' Get metadata from UN Comtrade Database API
 #'
 #' @description Query meta data from the UN Comtrade API
-#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`.
+#' @details for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 #' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
 #' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
 #' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
@@ -10,6 +10,7 @@
 #' @export
 #' @import httr dplyr
 #' @importFrom magrittr %>%
+#' @importFrom purrr pluck
 #' @examples
 #' getMetadata(clCode = "H6")
 getMetadata <- function(
@@ -17,9 +18,10 @@ getMetadata <- function(
     freqCode = "M",
     clCode = "HS"){
 
-  if(is.null(comtrader::get_uncomtrade_key())){
+  if(is.null(get_uncomtrade_key())){
 
-    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+    warning("API key is not set. Please use set_uncomtrade_key() to set your API key to access the data.")
+    return(NULL)
 
   }
 

@@ -1,6 +1,6 @@
 #' Custom get data from UN Comtrade Database API used by `comtrader::app`
 #'
-#' @description Custom get function to query data from the UN Comtrade API used by `comtrader::app`
+#' @description Custom get function to query data from the [UN Comtrade API](`https://comtradedeveloper.un.org`) used by `comtrader::ctdashboard` Shiny app
 #' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
 #' @param reporterCode a character string indicating reporter code (M49 International Country Classification)
 #' @param period a character string indicating period. Year ("YYYY") or yearmonth ("YYYYMM"). Use character vector for multiple periods (defaults to all)
@@ -19,9 +19,8 @@
 #' @import httr dplyr lubridate
 #' @importFrom magrittr %>%
 #' @importFrom purrr map_chr
+#' @importFrom purrr pluck
 #' @export
-#' @examples
-#' ctApp(freqCode = "M", reporterCode = 36, period = "202001", uncomtrade_key = "")
 ctApp <- function(
     freqCode = "M",
     reporterCode = NULL,

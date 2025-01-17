@@ -15,15 +15,17 @@ RoxygenNote: 7.2.3
 Imports: 
     dplyr (>= 1.1.2),
     httr (>= 1.4.7),
-    jsonlite,
     lubridate (>= 1.9.2),
     magrittr,
-    purrr (>= 1.0.1),
+    purrr,
+    rlang,
     shiny,
     shinydashboard,
     shinyWidgets,
-    stringr (>= 1.5.0),
     tibble (>= 3.2.1),
     tidyr
+Suggests:
+    testthat, 
+    roxygen2 
 Depends: 
     R (>= 2.10)

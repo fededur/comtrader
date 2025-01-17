@@ -1,7 +1,7 @@
 #' Get dataset availability from UN Comtrade Database API
 #'
 #' @description Query datasets available in the UN Comtrade API
-#' @details further details on API features available at: `https://comtradedeveloper.un.org/api-details#api=comtrade-v1`
+#' @details for further details visit the [UN Comtrade API developer site](`https://comtradedeveloper.un.org`)
 #' @param typeCode a character string indicating type of trade: "C" for commodities and "S" for service
 #' @param freqCode a character string indicating trade frequency: "A" for annual and "M" for monthly
 #' @param clCode a character string indicating trade classification (IMTS): "HS", "SITC", "BEC" or "EBOPS"
@@ -15,7 +15,7 @@
 #' @import httr dplyr
 #' @importFrom magrittr %>%
 #' @examples
-#' getDagetDa(clCode = "H6", publishedDateFrom = "2020-01-01")
+#' getDa(clCode = "H6", publishedDateFrom = "2020-01-01")
 getDa <- function(
     typeCode = "C",
     freqCode = "M",
@@ -25,9 +25,10 @@ getDa <- function(
     publishedDateFrom,
     publishedDateTo){
 
-  if(is.null(comtrader::get_uncomtrade_key())){
+  if(is.null(get_uncomtrade_key())){
 
-    stop("Use set_uncomtrade_key() to set UN Comtrade API access key")
+    warning("API key is not set. Please use set_uncomtrade_key() to set your API key to access the data.")
+    return(NULL)
 
   }
 
