@@ -5,7 +5,7 @@
 \alias{hscodes}
 \title{NZHSC codes and SOPI descriptions for comtrader shiny app}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1701 rows and 3 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1700 rows and 3 columns.
 
 \describe{
   \item{sopiLevel}{SOPI level.}
