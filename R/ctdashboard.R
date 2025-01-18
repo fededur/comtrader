@@ -1,8 +1,9 @@
 #' UN Comtrade shiny app
 #'
 #' @description run shiny app to query data from the UN Comtrade API.
-#' @import shiny shinydashboard shinyWidgets dplyr purrr rlang
+#' @import shiny shinydashboard shinyWidgets dplyr rlang
 #' @importFrom magrittr %>%
+#' @importFrom purrr pluck
 #' @importFrom utils write.csv
 #' @export
 ctdashboard <- function(){
