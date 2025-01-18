@@ -30,11 +30,23 @@ To launch the app run:
 library(comtrader)
 ctdashboard()
 ```
+Enter unquoted API key as shown below:
+
 <p align="center">
   <img src="man/images/dash-enter-key.png" alt="Enter API key screen" title="Enter API key as shown here or using the'Set API key' button" width="500">
 </p>
 
+
 ### Support functions
+
+Functions and data are documented in the package. You can access the documentation as shown below:
+
+``` r
+??comtrader
+??comtrader::omtcodes
+??comtrader::getCTSopi
+```
+
 - API access key.
   - **set_uncomtrade_key** set the API key before calling any other function.
   - **get_uncomtrade_key** retrieve the API key that is currently loaded in your system.
@@ -90,8 +102,10 @@ This is a basic example which shows you how to solve a common query:
 
 ``` r
 library(comtrader)
-set_uncomtrade_key(key = "****************")
+# 1) set key
+set_uncomtrade_key(key = "jvfd5ssbgf51bgf5b") # this is a fake key it won't work!
 
+# 2) build query
 getCTSopi(reporterCode = 36,
           startDate = "2020-01-01",
           endDate = "2020-02-01",
