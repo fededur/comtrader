@@ -31,8 +31,8 @@ jobs:
     - name: Build and install package
       run: |
         R CMD build .
-        R CMD INSTALL mypackage_*.tar.gz  # Replace 'mypackage' with your package name
+        R CMD INSTALL comtrader_*.tar.gz
 
     - name: Run R CMD check
       run: |
-        R CMD check mypackage_*.tar.gz --no-manual --as-cran
+        R CMD check comtrader_*.tar.gz --no-manual --as-cran
