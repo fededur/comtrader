@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This package simplifies queying data from the UN Comtrade APIs.
+This package simplifies querying international trade data from UN Comtrade APIs. It uses [SOPI](https://www.mpi.govt.nz/resources-and-forms/economic-intelligence/situation-and-outlook-for-primary-industries/sopi-reports/) product categories to build the queries.
 
 ## Installation
 
@@ -12,9 +12,8 @@ You can install the development version of comtrader from [GitHub](https://githu
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("fduranov/comtrader", auth_token = "***********")
+devtools::install_github("fededur/comtrader")
 ```
-Contact Federico at <federico.duranovich@mpi.govt> for the authentication token.
 
 ## Prerequisites
 You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** to be able to connect to the API.<br/>
@@ -23,8 +22,7 @@ For further information you can visit the [UN Comtrade site](https://uncomtrade.
 ## Components
 
 ### Shiny app
-- comtrader shiny app.
-  - **ctdashboard** shiny app wrapper function.
+  - **ctdashboard** 
 
 To launch the app run:
 
@@ -33,29 +31,29 @@ library(comtrader)
 ctdashboard()
 ```
 
-### Functions
+### Support functions
 - API access key.
   - **set_uncomtrade_key** set the API key before calling any other function.
   - **get_uncomtrade_key** retrieve the API key that is currently loaded in your system.
 
 - Get: Model class to extract the data into tibble.
-  - **getCTSopi** return tibble containing trade data based on query using SOPI categories.
+  - **ctApp** Custom get data from UN Comtrade Database API used by 'comtrader::ctdashboard'.
+  - **getCTSopi** Custom get data from UN Comtrade Database API
   - **getUNC** return tibble containing trade data based on query.
   - **getTariffline** return tibble containing tariff line data based on query.
-  - **ctApp** return tibble containing trade data based on query using SOPI categories. 
+
   
-- DataAvailability: Model class to extract data availability
-  - **getDa** return tibble containing trade dataset availability based on query.
-  - **getDaTariffline** return tibble containing tariff line dataset availability based on query.
+- DataAvailability: Model class to extract data availability.
+  - **getDa** Get dataset availability from UN Comtrade Database API.
+  - **getDaTariffline** Get tariff line data availability from UN Comtrade Database API (uses time ranges in query).
+  - **getTariffline** Get tariff line data from UN Comtrade Database API. 
   
 - Metadata: Model class to extract meta data into tibble.
-  - **getLiveUpdate** return tibble containing progress on UN Comtrade data release.
-  - **getMeatadata** return tibble containing comtrade metadata.
+  - **getLiveUpdate** Get live update data from UN Comtrade Database API.
+  - **getMeatadata** Get metadata from UN Comtrade Database API.
  
-- SUV: Model class to extract data on Standard Unit Values (SUV) and their ranges.
-  - **getSUV** return tibble containing SUV data based on query.
 
-- Data: tibble containing data to support querying.
+- Data to support querying:
   - **omtcodes** contains NZHSC and SOPI codes and categories to assist in querying the data.
   - **hscodes** contains HS and SOPI codes and categories to assist in querying by comtrader shiny app.
   - **reportercodes** contains a named list of reporter country codes to use in comtrader shiny app.
@@ -91,12 +89,11 @@ This is a basic example which shows you how to solve a common query:
 library(comtrader)
 set_uncomtrade_key(key = "****************")
 
-dairydata <- getCTSopi(freqCode = "A",
-  flowCode = "X",
-  startDate = "2020-01-01",
-  endDate = "2023-05-01",
-  sopiLevel = `Primary Industry Sector`,
-  sopiFilter = "Dairy")
+getCTSopi(reporterCode = 36,
+          startDate = "2020-01-01",
+          endDate = "2020-02-01",
+          sopiLevel = Primary_Industry_Sector,
+          sopiFilter = "Dairy")
 
 ```
 
