@@ -30,6 +30,9 @@ To launch the app run:
 library(comtrader)
 ctdashboard()
 ```
+<p align="center">
+  <img src="man/images/dash-enter-key.png" alt="Enter API key screen" title="Enter API key as shown here or using the'Set API key' button" width="500">
+</p>
 
 ### Support functions
 - API access key.
