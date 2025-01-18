@@ -6,18 +6,58 @@
 
 This package simplifies querying international trade data from UN Comtrade APIs. It uses [SOPI](https://www.mpi.govt.nz/resources-and-forms/economic-intelligence/situation-and-outlook-for-primary-industries/sopi-reports/) product categories to build the queries.
 
-## Installation
-
-You can install the development version of comtrader from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("fededur/comtrader")
-```
 
 ## Prerequisites
 You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** to be able to connect to the API.<br/>
 For further information you can visit the [UN Comtrade site](https://uncomtrade.org).
+
+
+## System Requirements
+
+To use this package, ensure the following system requirements are met:
+- **R version**: 2.10 or higher.
+- **R package dependencies**:
+
+```r
+  required_packages <- c("dplyr", "httr", "lubridate", "magrittr", 
+                         "purrr", "rlang", "shiny", "shinydashboard", 
+                         "shinyWidgets", "tibble", "tidyr", "testthat", "roxygen2")
+  cat(paste(required_packages, collapse = ", "), "\n")
+```
+
+
+### Installation
+
+You can install the development version of comtrader from [GitHub](https://github.com/) with:
+
+``` r
+# You might need to install devtools first:
+ if (!requireNamespace("devtools", quietly = TRUE)) {
+     install.packages("devtools")
+   }
+
+devtools::install_github("fededur/comtrader")
+```
+
+Run the code below to install package dependencies
+
+```r
+# List of required packages
+required_packages <- c("dplyr", "httr", "lubridate", "magrittr", 
+                       "purrr", "rlang", "shiny", "shinydashboard", 
+                       "shinyWidgets", "tibble", "tidyr", "testthat", "roxygen2")
+
+# Install missing packages
+missing_packages <- required_packages[!(required_packages %in% installed.packages()[, "Package"])]
+if (length(missing_packages) > 0) {
+  install.packages(missing_packages)
+}
+
+# Print status
+if (length(missing_packages) == 0) {
+  message("All required packages are already installed.")
+}
+```
 
 ## Components
 
