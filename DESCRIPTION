@@ -2,6 +2,7 @@ Package: comtrader
 Type: Package
 Title: Access data from UNComtrade API
 Version: 0.1.0
+Author: Federico Duranovich [aut, cre]
 Authors@R: 
     person("Federico", "Duranovich", , "federico.duranovich@mpi.govt.nz", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7950-0187"))
