@@ -2,9 +2,7 @@
 FROM rocker/shiny:latest
 
 # Install system dependencies for R packages
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirror.ubuntu.com/ubuntu/|g' /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get -y --no-install-recommends install \
+RUN apt-get update && apt-get -y --no-install-recommends install \
         libxml2-dev \
         libcairo2-dev \
         libsqlite3-dev \
@@ -19,9 +17,9 @@ RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirror.ubuntu.com/ubuntu/
 # Clone the comtrader repository
 RUN git clone https://github.com/fededur/comtrader.git /tmp/comtrader
 
-# Build and install the comtrader package
+# Build the package and install it
 RUN R CMD build /tmp/comtrader && \
-    R CMD INSTALL /tmp/comtrader_0.1.0.tar.gz
+    R CMD INSTALL /tmp/comtrader/comtrader_0.1.0.tar.gz
 
 # Install additional R dependencies (if required)
 RUN R -e "install.packages(c('dplyr', 'httr', 'lubridate', 'shiny', 'shinydashboard', 'shinyWidgets'), repos = 'https://cloud.r-project.org')"
