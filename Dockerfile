@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 RUN Rscript -e "install.packages('remotes')"
 
 # Install the comtrader package from GitHub without prompts
-RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always')"
+RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'never')"
 
 # Expose the default Shiny server port
 EXPOSE 3838
