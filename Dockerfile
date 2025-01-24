@@ -1,29 +1,31 @@
-# Use the Rocker Shiny base image
-FROM rocker/shiny:latest
+# Base image with R and Shiny server
+FROM rocker/shiny:4.3.1
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV R_REMOTES_NO_ERRORS_FROM_WARNINGS=true
 
 # Install system dependencies for R packages
-RUN apt-get update && apt-get -y --no-install-recommends install \
-        libxml2-dev \
-        libcairo2-dev \
-        libsqlite3-dev \
-        libpq-dev \
-        libssh2-1-dev \
-        unixodbc-dev \
-        libcurl4-openssl-dev \
-        libssl-dev \
-        git && \
-    apt-get clean
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    pandoc \
+    git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Clone the comtrader repository
-RUN git clone https://github.com/fededur/comtrader.git /tmp/comtrader
+# Install R package dependencies (including remotes)
+RUN Rscript -e "install.packages('remotes')"
 
-# Build the package and install it
-RUN R CMD build /tmp/comtrader && \
-    R CMD INSTALL /tmp/comtrader/comtrader_0.1.0.tar.gz
+# Install the comtrader package from GitHub without prompts
+RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always')"
 
-# Install additional R dependencies (if required)
-RUN R -e "install.packages(c('dplyr', 'httr', 'lubridate', 'shiny', 'shinydashboard', 'shinyWidgets'), repos = 'https://cloud.r-project.org')"
+# Expose the default Shiny server port
+EXPOSE 3838
 
-# Run the Shiny app
+# Set permissions (required for the Shiny server)
+RUN chown -R shiny:shiny /srv/shiny-server
+
+# Set the Shiny server as the entrypoint
 CMD ["R", "-e", "comtrader::ctdashboard()"]
-
