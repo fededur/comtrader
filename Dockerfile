@@ -10,19 +10,19 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
+    libgit2-dev \
+    libicu-dev \
     build-essential \
+    pandoc \
     git \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    ca-certificates \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install remotes package
 RUN Rscript -e "install.packages('remotes')"
 
 # Install the comtrader package from GitHub
 RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always')"
-
-# Load comtrader
-RUN Rscript -e "library(comtrader)"
 
 # Expose the default Shiny server port
 EXPOSE 3838
@@ -31,5 +31,5 @@ EXPOSE 3838
 RUN chown -R shiny:shiny /srv/shiny-server
 
 # Set the Shiny server as the entrypoint
-CMD ["R", "-e", "comtrader::ctdashboard()"]
+CMD ["R", "-e", "library(comtrader); comtrader::ctdashboard()"]
 
