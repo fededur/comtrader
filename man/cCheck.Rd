@@ -4,7 +4,7 @@
 \alias{cCheck}
 \title{Identify conflicts between two categories in a table}
 \usage{
-cCheck(x = comtrader:::omtcodes, ref1, ref2)
+cCheck(x = comtrader::omtcodes, ref1, ref2)
 }
 \arguments{
 \item{x}{a data frame}
@@ -23,5 +23,5 @@ Creates a table of counts of matching categories between two columns of a table
 the table is built with reference to `ref1`
 }
 \examples{
-cCheck(x = comtrader:::omtcodes, ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
+cCheck(x = comtrader::omtcodes, ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
 }

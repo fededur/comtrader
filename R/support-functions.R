@@ -168,7 +168,7 @@ getCTSopi <- function(
 
   }
 
-  data("omtcodes", package = "comtrader", envir=environment())
+  omtcodes <- comtrader::omtcodes
 
   sopiLevel_quo <-rlang::enquo(sopiLevel)
 

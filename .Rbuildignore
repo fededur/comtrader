@@ -4,4 +4,5 @@
 ^data-raw$
 ^README\.md$
 ^\.Rhistory$
-^man/images$
+images/
+Dockerfile
