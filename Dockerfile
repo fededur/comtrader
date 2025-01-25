@@ -22,7 +22,7 @@ RUN Rscript -e "install.packages('remotes')"
 RUN Rscript -e "installed.packages()[, 'Package']"
 
 # Install the comtrader package from GitHub
-RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always', verbose = TRUE)"
+RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'never')"
 
 # Debug: Check if comtrader is installed
 RUN Rscript -e "library(comtrader)"
