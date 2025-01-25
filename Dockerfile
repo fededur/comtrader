@@ -1,5 +1,5 @@
 # Base image with R and Shiny server
-FROM rocker/shiny:latest
+FROM rocker/shiny:4.3.1
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
-    pandoc \
+    build-essential \
     git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
