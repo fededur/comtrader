@@ -22,8 +22,11 @@ RUN apt-get update && apt-get install -y \
 # Install remotes package
 RUN Rscript -e "install.packages('remotes')"
 
-# Install the comtrader package from GitHub
-RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always')"
+# Install missing R dependencies
+RUN Rscript -e "install.packages(c('dplyr', 'httr', 'lubridate', 'shiny', 'shinydashboard', 'shinyWidgets'), repos = 'https://cloud.r-project.org')"
+
+# Install comtrader package
+RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always', verbose = TRUE)"
 
 # Expose the default Shiny server port
 EXPOSE 3838
