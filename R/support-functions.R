@@ -543,8 +543,8 @@ getMetadata <- function(
 #' @importFrom tidyr pivot_wider
 #' @export
 #' @examples
-#' cCheck(x = comtrader::omtcodes, ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
-cCheck <- function(x = comtrader::omtcodes, ref1, ref2){
+#' cCheck(x = comtrader:::omtcodes, ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
+cCheck <- function(x = comtrader:::omtcodes, ref1, ref2){
 
   ref1_quo <- rlang::enquo(ref1)
   ref2_quo <- rlang::enquo(ref2)
@@ -584,7 +584,7 @@ commodityRecode <-  function(hsLevel = NZHSCLevel6,
                              sopiFilter = NULL,
                              query = TRUE) {
 
-  omtcodes %>%
+  comtrader:::omtcodes %>%
     tibble::as_tibble() %>%
     select({{sopiLevel}},{{hsLevel}}) %>%
     {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel}}, ~ . %in% {{sopiFilter}})) else .} %>%
