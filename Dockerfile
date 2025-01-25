@@ -1,5 +1,5 @@
 # Base image with R and Shiny server
-FROM rocker/shiny:4.3.1
+FROM rocker/shiny:4.3.1 AS base
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
