@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     pandoc \
     git \
     ca-certificates \
+    --fix-missing && \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install remotes package
