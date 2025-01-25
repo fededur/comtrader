@@ -4,5 +4,5 @@
 ^data-raw$
 ^README\.md$
 ^\.Rhistory$
-images/
+^images/
 Dockerfile
