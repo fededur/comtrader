@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 RUN Rscript -e "install.packages('remotes')"
 
 # Install the comtrader package from GitHub
-RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'never')"
+RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always')"
 
 # Load comtrader
 RUN Rscript -e "library(comtrader)"
