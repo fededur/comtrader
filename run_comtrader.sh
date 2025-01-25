@@ -8,9 +8,9 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Step 2: Run the Docker Container
+# Step 2: Run the Docker Container in Interactive Mode
 echo "Starting the Docker container..."
-CONTAINER_ID=$(docker run -d -p 3838:3838 comtrader-shiny)
+CONTAINER_ID=$(docker run -it -d -p 3838:3838 comtrader-shiny)
 if [ $? -ne 0 ]; then
   echo "Error: Failed to start the Docker container. Exiting."
   exit 1
@@ -24,9 +24,9 @@ sleep 5  # Allow time for the container to initialize
 BROWSER_URL="http://localhost:3838"
 xdg-open $BROWSER_URL || start $BROWSER_URL || open $BROWSER_URL
 
-# Step 4: Wait for User to Stop the App
-echo "The app is running. To stop, close this terminal or press Ctrl+C."
-wait $CONTAINER_ID
+# Step 4: Follow the Container Logs
+echo "Press Ctrl+C to stop the app..."
+docker logs -f $CONTAINER_ID
 
 # Step 5: Stop and Clean Up the Docker Container
 echo "Stopping the Docker container..."
