@@ -7,16 +7,22 @@
 #' @importFrom utils write.csv
 #' @export
 ctdashboard <- function(){
+
+  data("hscodes", package = "comtrader")
+  data("omtcodes", package = "comtrader")
+  data("reportercodes", package = "comtrader")
+  data("partnercodes", package = "comtrader")
+
 # ui ----
   ui <- dashboardPage(skin = "purple",
                       dashboardHeader(title = "comtrader", tags$li(class = "dropdown",
                                                                    tags$style(".main-header .logo {text-align:left}"))),
                       dashboardSidebar(
-                        div(selectInput("sopilevel", "SOPI Level", choices = unique(comtrader:::hscodes$sopiLevel)),
+                        div(selectInput("sopilevel", "SOPI Level", choices = unique(hscodes$sopiLevel)),
                             selectInput("sopifilter", "Sopi Filter", choices = NULL, multiple = TRUE, selected = "All categories"),
                             selectInput("flow", "Trade flow", choices = list("Exports" = "X", "Re-exports" = "RX", "Imports" = "M", "Re-imports" = "RM"), multiple = TRUE),
-                            selectInput("country", "Country", choices =  comtrader:::reportercodes, multiple = TRUE),
-                            selectInput("partner", "Trade partner", choices =  comtrader:::partnercodes, multiple = TRUE),
+                            selectInput("country", "Country", choices =  reportercodes, multiple = TRUE),
+                            selectInput("partner", "Trade partner", choices =  partnercodes, multiple = TRUE),
                             radioButtons("frequency", "Frequency", choices = list("Monthly" = "M", "Annual" = "A"), inline=TRUE),
                             airDatepickerInput(inputId = "period", label = "Period", multiple = TRUE, clearButton = TRUE, maxDate = Sys.Date()),
                             style = 'font-weight:normal; font-family:"Calibri"; font-size: 12px;'),
@@ -112,7 +118,7 @@ ctdashboard <- function(){
 
     # update selectInput based on filters
     sopilevel <- reactive({
-      filter(comtrader:::hscodes, sopiLevel == input$sopilevel)
+      filter(hscodes, sopiLevel == input$sopilevel)
     })
 
     observeEvent(sopilevel(), {
@@ -162,14 +168,14 @@ ctdashboard <- function(){
 
     query_result <- eventReactive(input$sq, {
 
-      hs <- comtrader:::hscodes %>%
+      hs <- hscodes %>%
         filter(sopiFilter %in% input$sopifilter) %>%
         pull(code) %>%
         unique()
 
       sopilevel_quoname <- rlang::quo_name(input$sopilevel)
 
-      hscodes_named <- comtrader:::omtcodes %>%
+      hscodes_named <- omtcodes %>%
         select(NZHSCLevel6,{{sopilevel_quoname}}) %>%
         deframe()
 
