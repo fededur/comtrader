@@ -12,9 +12,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libgit2-dev \
     libicu-dev \
-    build-essential \
     git \
-    ca-certificates \
     --fix-missing --no-install-recommends && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -25,14 +23,13 @@ RUN Rscript -e "install.packages('remotes')"
 RUN Rscript -e "install.packages(c('dplyr', 'httr', 'lubridate', 'shiny', 'shinydashboard', 'shinyWidgets'), repos = 'https://cloud.r-project.org')"
 
 # Install comtrader package
-RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'always', verbose = TRUE)"
+RUN Rscript -e "remotes::install_github('fededur/comtrader', dependencies = TRUE, upgrade = 'never')"
 
 # Expose the default Shiny server port
 EXPOSE 3838
 
-# Set permissions (required for the Shiny server)
+# Set permissions
 RUN chown -R shiny:shiny /srv/shiny-server
 
 # Set the Shiny server as the entrypoint
-CMD ["R", "-e", "library(comtrader); comtrader::ctdashboard()"]
-
+CMD ["R", "-e", "options(shiny.host = '0.0.0.0', shiny.port = 3838); library(comtrader); comtrader::ctdashboard()"]
