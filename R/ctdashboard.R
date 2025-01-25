@@ -8,10 +8,10 @@
 #' @export
 ctdashboard <- function(){
 
-  data("hscodes", package = "comtrader")
-  data("omtcodes", package = "comtrader")
-  data("reportercodes", package = "comtrader")
-  data("partnercodes", package = "comtrader")
+  data("hscodes", package = "comtrader", envir=environment())
+  data("omtcodes", package = "comtrader", envir=environment())
+  data("reportercodes", package = "comtrader", envir=environment())
+  data("partnercodes", package = "comtrader", envir=environment())
 
 # ui ----
   ui <- dashboardPage(skin = "purple",

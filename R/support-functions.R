@@ -168,6 +168,8 @@ getCTSopi <- function(
 
   }
 
+  data("omtcodes", package = "comtrader", envir=environment())
+
   sopiLevel_quo <-rlang::enquo(sopiLevel)
 
   hs_quo <- rlang::enquo(hs)
@@ -201,7 +203,7 @@ getCTSopi <- function(
       nullToChr()
   }
 
-  QueryCodes <- comtrader::omtcodes %>%
+  QueryCodes <- omtcodes %>%
     tibble::as_tibble() %>%
     select({{sopiLevel_quo}},{{hs_quo}}) %>%
     {if(!is.null({{sopiFilter}})) filter(.,if_all({{sopiLevel_quo}}, ~ . %in% {{sopiFilter}})) else .} %>%
@@ -546,22 +548,24 @@ getMetadata <- function(
 #' cCheck(x = comtrader::omtcodes, ref1 = NZHSCLevel4, ref2 = `SOPI_group_HS6`)
 cCheck <- function(x = comtrader::omtcodes, ref1, ref2){
 
-  ref1_quo <- rlang::enquo(ref1)
-  ref2_quo <- rlang::enquo(ref2)
-
   x %>%
     as_tibble() %>%
-    select({{ref1_quo}},{{ref2_quo}}) %>%
-    tidyr::pivot_wider(values_from = {{ref2_quo}},
-                       names_from = {{ref2_quo}},
-                       values_fn = function(x) length(unique(x))) %>%
+    select({{ref1}}, {{ref2}}) %>%
+    tidyr::pivot_wider(
+      names_from = {{ref2}},
+      values_from = {{ref2}},
+      values_fn = ~ length(unique(.))
+    ) %>%
     replace(is.na(.), 0) %>%
-    group_by({{ref1_quo}}) %>%
-    mutate("{{ref2_quo}}" := paste0(names(.[-1])[as.logical(cur_data())], collapse = ", ")) %>%
+    group_by({{ref1}}) %>%
+    mutate(
+      {{ref2}} := paste0(names(cur_data()[-1])[cur_data()[-1] > 0], collapse = ", ")
+    ) %>%
     ungroup() %>%
-    mutate(count = rowSums(across(-c({{ref1_quo}},{{ref2_quo}})), na.rm = TRUE)) %>%
-    select({{ref1_quo}},{{ref2_quo}},count) %>%
+    mutate(count = rowSums(across(-c({{ref1}}, {{ref2}})), na.rm = TRUE)) %>%
+    select({{ref1}}, {{ref2}}, count) %>%
     arrange(desc(count))
+
 }
 
 
