@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     git \
     ca-certificates \
     --fix-missing && \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install remotes package
 RUN Rscript -e "install.packages('remotes')"
