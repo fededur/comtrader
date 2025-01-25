@@ -13,10 +13,9 @@ RUN apt-get update && apt-get install -y \
     libgit2-dev \
     libicu-dev \
     build-essential \
-    pandoc \
     git \
     ca-certificates \
-    --fix-missing && \
+    --fix-missing --no-install-recommends && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install remotes package
