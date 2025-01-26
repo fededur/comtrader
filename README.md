@@ -98,7 +98,7 @@ Construct and run trade queries within the app. Note that data may not always be
 
 5. Stopping the App:
 
-  - To stop the app, close the browser window or press `Ctrl+C` in the terminal running the script. The shell script handles container cleanup automatically.
+  - To stop the app, close the browser window or press `Ctrl+C` in the terminal running the script. You will be prompted with the option of stoping the containing and cleaning the removing the Docker image.
 
 ## Option B: Run using RStudio
 
