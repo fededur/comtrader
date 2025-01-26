@@ -51,7 +51,7 @@ This is the easiest and most consistent method to run the app without dealing wi
     Open a Git Bash or RStudio Terminal, go to the folder for your on your machine and run:
 
 ```bash
-git clone https://github.com/fededur/aps-pert-sim.git
+git clone https://github.com/fededur/comtrader.git
 ```
 
   - OR download the repository as a ZIP file:
