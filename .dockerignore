@@ -1,0 +1,16 @@
+.Rproj.user
+.Rhistory
+.RData
+.Rproj
+.DS_Store
+Thumbs.db
+.git
+.gitignore
+.env
+.env.local
+secrets/
+node_modules/
+dist/
+coverage/
+.vscode/
+.idea/
