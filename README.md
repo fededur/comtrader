@@ -98,7 +98,7 @@ Construct and run trade queries within the app. Note that data may not always be
 
 5. Stopping the App:
 
-  - To stop the app, close the browser window or press `Ctrl+C` in the terminal running the script. You will be prompted with the option of stoping the containing and cleaning the removing the Docker image.
+  - To stop the app, close the browser window. Go to your terminal and press `Ctrl+C` to stop the app. Follow the log in the terminal, you will be prompted with the option of stopping the containing and removing the Docker image or to leave as is (hit "y" to delete).
 
 ## Option B: Run using RStudio
 
