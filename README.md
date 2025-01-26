@@ -4,42 +4,118 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This package simplifies querying international trade data from UN Comtrade APIs. It uses [SOPI](https://www.mpi.govt.nz/resources-and-forms/economic-intelligence/situation-and-outlook-for-primary-industries/sopi-reports/) product categories to build the queries.
+This package provides a simple and efficient way to query international trade data from [UN Comtrade](https://comtrade.un.org) APIs. It leverages [SOPI](https://www.mpi.govt.nz/resources-and-forms/economic-intelligence/situation-and-outlook-for-primary-industries/sopi-reports/) product categories to structure and build international trade queries.
 
+In addition to the package’s core functionalities, this repository allows you to build and run the **comtrader** Shiny web application. The app is containerised using Docker for simplicity, eliminating dependency and environment configuration issues. Alternatively, you can run the app directly using RStudio. 
+
+The `comtrader` includes functions and reference data that can be applied to other projects beyond the Shiny app.
+
+## Getting Started
+
+Follow the steps below to set up and run the **comtrader** Shiny app on your local machine.
 
 ## Prerequisites
-You need to sign in to [UN Comtrade](https://comtrade.un.org) and get a **key** to be able to connect to the API.<br/>
-For further information you can visit the [UN Comtrade site](https://uncomtrade.org).
+
+Before running the app, ensure the following prerequisites are met:
+
+#### 1. UN Comtrade Access:
+
+- You must sign up on [UN Comtrade](https://comtrade.un.org) and obtain an API key.
+
+- Refer to the [UN Comtrade site](https://uncomtrade.org) for additional information.
 
 
-## System Requirements
+#### 2. Required tools
 
-To use this package, ensure the following system requirements are met:
-- **R version**: 2.10 or higher.
-- **R package dependencies**:
+- **Docker**: Installed and running on your system.<br/>
+  - Install Docker from [here](https://www.docker.com/)
+
+- **Git** (Optional if cloning the repository).<br/>
+  - Download and install Git from [here](https://git-scm.com/)
+
+- **RStudio** (Optional if running the app without Docker).<br/>
+  - Install RStudio from [here](https://posit.co/download/rstudio-desktop/)
+  
+- **Web browser**: Any modern web browser (e.g., Chrome, Firefox, Edge).
+
+
+## Option A: Run using Docker 
+
+This is the easiest and most consistent method to run the app without dealing with dependency issues.
+
+1. Obtain the Repository Files:
+  Copy the project files to your local machine using one of the following methods.
+
+  - Clone the repository (requires Git)
+
+    Open a Git Bash or RStudio Terminal, go to the folder for your on your machine and run:
+
+```bash
+git clone https://github.com/fededur/aps-pert-sim.git
+```
+
+  - OR download the repository as a ZIP file:
+
+    - Click the green Code button on this page and select Download ZIP. 
+    
+    - Extract the contents of the Zipped file to a folder on your machine.
+    
+
+2. Ensure Docker is running:
+
+ - Open Docker Desktop, sign in to your account, and verify it is active.
+
+3. Run the app:
+  
+  - Navigate to the local repository folder in a terminal (Git Bash or RStudio terminal):
+
+```bash
+cd /path/to/comtrader
+```
+
+  - Run the shell script to build and launch the app:
+
+```bash
+./run_comtrader.sh
+```
+
+4. Access the app:
+  - The app should automatically launch using your default browser at:
+
+```bash
+http://localhost:3838
+```
+
+  - Set Your API Key:
+When prompted, enter your UN Comtrade API key (unquoted) as shown below. You can also set it using the Set API Key button in the app (only   need to set it once).
+
+<p align="center">
+  <img src="images/dash-enter-key.png" alt="Enter API key screen" title="Enter API key as shown here or using the'Set API key' button" width="500">
+</p>
+
+  - Build your query. 
+Construct and run trade queries within the app. Note that data may not always be up-to-date. Query annual data from major reporting and partnering countries, such as China or the US, for reliable results.
+
+5. Stopping the App:
+
+  - To stop the app, close the browser window or press `Ctrl+C` in the terminal running the script. The shell script handles container cleanup automatically.
+
+## Option B: Run using RStudio
+
+If you prefer to run the app without Docker, you follow these steps to run it from the RStudio console.
+
+1. Install `comtrader`: 
 
 ```r
-  required_packages <- c("dplyr", "httr", "lubridate", "magrittr", 
-                         "purrr", "rlang", "shiny", "shinydashboard", 
-                         "shinyWidgets", "tibble", "tidyr", "testthat", "roxygen2")
-  cat(paste(required_packages, collapse = ", "), "\n")
+# Install 'remotes' package if not already installed
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+
+# Install comtrader from GitHub
+remotes::install_github("fededur/comtrader")
 ```
-
-
-### Installation
-
-You can install the development version of comtrader from [GitHub](https://github.com/) with:
-
-``` r
-# You might need to install devtools first:
- if (!requireNamespace("devtools", quietly = TRUE)) {
-     install.packages("devtools")
-   }
-
-devtools::install_github("fededur/comtrader")
-```
-
-Run the code below to install package dependencies
+2. Install package dependencies:
 
 ```r
 # List of required packages
@@ -58,33 +134,37 @@ if (length(missing_packages) == 0) {
   message("All required packages are already installed.")
 }
 ```
+3. Load `comtrader` and launch the app:
 
-## Components
+```r
+library(comtrader)
+comtrader::ctdashboard()
+```
+4. Set Your API Key:
+
+Enter your UN Comtrade API key (unquoted) when prompted.
+
+5. Use:
+  
+  - Build your query.
+  
+  - To stop the app, click the "Stop" button in RStudio or press the "Escape" key in the R console.
+
+
+## `comtrader` package components
 
 ### Shiny app
   - **ctdashboard** 
-
-To launch the app run:
-
-``` r
-library(comtrader)
-ctdashboard()
-```
-Enter unquoted API key as shown below:
-
-<p align="center">
-  <img src="images/dash-enter-key.png" alt="Enter API key screen" title="Enter API key as shown here or using the'Set API key' button" width="500">
-</p>
-
 
 ### Support functions
 
 Functions and data are documented in the package. You can access the documentation as shown below:
 
 ``` r
-??comtrader
-??comtrader::omtcodes
-??comtrader::getCTSopi
+library(comtrader)
+??comtrader # package documentation
+??omtcodes # data documentation
+??getCTSopi # function documentation
 ```
 
 - API access key.
